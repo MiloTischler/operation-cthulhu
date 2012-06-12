@@ -1,24 +1,21 @@
 module.exports = function(app, models) {
-    
+
+    // Redirect to posts
     app.get('/', function(req, res) {
+        res.redirect('/posts');
+    });
+    
+    // Load all posts
+    app.get('/posts', function(req, res) {
         var Post = models.posts;
-        
-        var post = new Post();
-        post.title = 'lol';
-        post.body = 'body';
-        post.save(function(err) {
+
+        Post.find({}).desc('date').run(function(err, posts) {
             if(err) throw err;
 
-            console.log('Post saved..');
-        });
-
-        Post.find({}, function(err, posts) {
-            if(err) throw err;
+            res.render('index.jade', {title : 'Posts', articles : posts});
 
             console.log('Loaded posts:');
             console.log(posts);
         });
-
-        res.send('okay..');
     });
 }
