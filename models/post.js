@@ -5,8 +5,9 @@ module.exports = function(mongoose) {
 
   var schema = new Schema({
     id: ObjectId,
-    title: { type: String, default: 'mytitle' },
-    body: { type: String, default: 'mybody' }
+    title : { type: String, default: 'Title' },
+    body  : { type: String, default: 'Body' },
+    date  : { type: Date, default: Date.now }
   });
 
   this.model = mongoose.model(collection, schema);
