@@ -19,5 +19,5 @@ module.exports = function(app, express, mongoose) {
       app.use(express.errorHandler()); 
     });
 
-    app.mongoose.connect('mongodb://localhost:27017');
+    app.mongoose.connect('mongodb://localhost:27017/blog');
 }

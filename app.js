@@ -8,10 +8,13 @@ var config = require('./config.js')(app, express);
 
 var models = {};
 
-models.examples = require('./models/example')(app.mongoose).model;
+models.posts = require('./models/post')(app.mongoose).model;
 
 require('./routes')(app, models);
 
 app.listen(process.env.PORT || 8888);
 
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+
+
+
