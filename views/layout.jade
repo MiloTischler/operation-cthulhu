@@ -2,5 +2,23 @@
 html
   head
     title= title
+    title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body!= body
+  body
+    div#wrapper
+        div#header
+            img#logo(src="/views/img/meinBlog.png",width="100",height="100")
+        div#menu
+            ul
+                a(href="") 
+                    li home
+                a(href="login")
+                    li login
+                a(href="register")
+                    li register
+                a(href="users")
+                    li users
+                a(href="newpost")
+                    li write post
+        div#content!= body
+        div#footer
