@@ -1,3 +1,4 @@
+
 /**
  * Module dependencies.
  */
@@ -26,16 +27,18 @@ app.configure('development', function(){
 
 app.configure('production', function(){
   app.use(express.errorHandler()); 
+
 });
 
 var articleProvider = new ArticleProvider('localhost', 27017);
 // Routes
 
+
 app.get('/', function(req, res){
     articleProvider.findAll( function(error,docs){
         res.render('index.jade', { 
             locals: {
-                title: 'Blog',
+                title: 'BlogOmfg',
                 articles:docs
             }
         });
@@ -43,8 +46,8 @@ app.get('/', function(req, res){
 });
 
 app.get('/new', function(req, res) {
-    res.render('blog_new.jade', { locals: {
-        title: 'New Post'
+    res.render('login.jade', { locals: {
+        title: 'UserList:'
     }
     });
 });
@@ -60,7 +63,7 @@ app.post('/new', function(req, res){
 
 app.get('/:id', function(req, res) {
     articleProvider.findById(req.params.id, function(error, article) {
-        res.render('blog_show.jade',
+        res.render('login.jade',
         { locals: {
             title: article.title,
             article:article
@@ -81,3 +84,4 @@ app.post('/addComment', function(req, res) {
 
 app.listen(8888);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+
