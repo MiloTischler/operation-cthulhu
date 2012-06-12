@@ -38,7 +38,7 @@ app.get('/', function(req, res){
     articleProvider.findAll( function(error,docs){
         res.render('index.jade', { 
             locals: {
-                title: 'Blog',
+                title: 'BlogOmfg',
                 articles:docs
             }
         });
@@ -46,8 +46,8 @@ app.get('/', function(req, res){
 });
 
 app.get('/new', function(req, res) {
-    res.render('blog_new.jade', { locals: {
-        title: 'New Post'
+    res.render('login.jade', { locals: {
+        title: 'UserList:'
     }
     });
 });
@@ -63,7 +63,7 @@ app.post('/new', function(req, res){
 
 app.get('/:id', function(req, res) {
     articleProvider.findById(req.params.id, function(error, article) {
-        res.render('blog_show.jade',
+        res.render('login.jade',
         { locals: {
             title: article.title,
             article:article

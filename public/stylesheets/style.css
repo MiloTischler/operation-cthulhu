@@ -1,5 +1,4 @@
 body {
-
   font-family: "Helvetica Neue", "Lucida Grande", "Arial";
   font-size: 13px;
   text-align: center;
@@ -11,6 +10,9 @@ h2 {
   margin: 0;
   font-size: 22px;
   color: #343434;
+}
+h3 {
+  font-size: 25px;
 }
 h1 {
   text-shadow: 1px 2px 2px #ddd;
@@ -35,5 +37,4 @@ h1 {
 }
 #articles .article .body {
   background-color: #ffa;
-
 }
