@@ -1,4 +1,4 @@
 operation-cthulhu
 =================
 
-Node.js blog with express and mongodb
+Node.js blog with express, jade, stylus and mongodb
