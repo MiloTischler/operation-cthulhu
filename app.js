@@ -1,13 +1,12 @@
-
 /**
  * Module dependencies.
  */
 
-var express = require('express');
-var ArticleProvider = require('./articleprovider-mongodb').ArticleProvider;
 
+var express = require('express');
 
 var app = module.exports = express.createServer();
+
 
 // Configuration
 
@@ -52,14 +51,9 @@ app.get('/new', function(req, res) {
     });
 });
 
-app.post('/new', function(req, res){
-    articleProvider.save({
-        title: req.param('title'),
-        body: req.param('body')
-    }, function( error, docs) {
-        res.redirect('/')
-    });
-});
+
+models.examples = require('./models/example')(app.mongoose).model;
+
 
 app.get('/:id', function(req, res) {
     articleProvider.findById(req.params.id, function(error, article) {
@@ -72,16 +66,8 @@ app.get('/:id', function(req, res) {
     });
 });
 
-app.post('/addComment', function(req, res) {
-    articleProvider.addCommentToArticle(req.param('_id'), {
-        person: req.param('person'),
-        comment: req.param('comment'),
-        created_at: new Date()
-       } , function( error, docs) {
-           res.redirect('/blog/' + req.param('_id'))
-       });
-});
 
-app.listen(8888);
+app.listen(process.env.PORT || 8888);
+
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 
