@@ -1,8 +1,24 @@
+module.exports = function(app, models) {
+    
+    app.get('/', function(req, res) {
+        var Post = models.posts;
+        
+        var post = new Post();
+        post.title = 'lol';
+        post.body = 'body';
+        post.save(function(err) {
+            if(err) throw err;
 
-/*
- * GET home page.
- */
+            console.log('Post saved..');
+        });
 
-exports.index = function(req, res){
-  res.render('index', { title: 'Express' })
-};
+        Post.find({}, function(err, posts) {
+            if(err) throw err;
+
+            console.log('Loaded posts:');
+            console.log(posts);
+        });
+
+        res.send('okay..');
+    });
+}
