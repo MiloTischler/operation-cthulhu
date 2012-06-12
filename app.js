@@ -1,4 +1,3 @@
-
 var express = require('express');
 
 var app = module.exports = express.createServer();
@@ -12,7 +11,7 @@ var models = {};
 
 
 models.posts = require('./models/post')(app.mongoose).model;
-
+models.users = require('./models/user')(app.mongoose).model;
 
 require('./routes')(app, models);
 
