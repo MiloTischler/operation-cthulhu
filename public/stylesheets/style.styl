@@ -10,17 +10,20 @@ body
   width 960px
 
 #menu 
-  width 960px
+  width 959px
   height 30px
   background-color: #444
+  border-right 1px solid #eee
 
 #menu ul
   list-style none
   display inline
 
-#menu ul a li
-  margin 10px 20px
+#menu ul a
+  padding 8px 20px
+  border-left 1px solid #eee
   float left
+  text-decoration none
 
 #menu ul a:link li,#menu ul a:active li ,#menu ul a:focus li,#menu ul a:visited li
   color #fff
@@ -28,8 +31,13 @@ body
 
 #menu ul a:hover li
   color #555
+
+#menu ul a:hover
   background-color #eee
   font-weight bold
+
+#menu ul a:last-child
+  border-right 1px solid #eee
 
 #wrapper
   width 960px
@@ -40,6 +48,7 @@ body
 
 #content
   width 960px
+  padding 20px
 
 #footer
   width 960px
