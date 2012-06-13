@@ -6,6 +6,7 @@ module.exports = function(app, models) {
         res.redirect('/posts');
     });
 
+
     // load userlist page
     app.get('/userList', function(req, res) {
 
@@ -33,4 +34,5 @@ module.exports = function(app, models) {
             console.log(user);
         });
     });
+
 }

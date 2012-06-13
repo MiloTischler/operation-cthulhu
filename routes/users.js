@@ -1,12 +1,19 @@
 module.exports = function(app, models) {
 
-    // load userlist page
-    app.get('/userList', function(req, res) {
 
-        // var User = models.users;
-        res.render('user/userList.jade', {
-            title: 'Userlist'
-            //    users: users
+
+   // load userlist page
+    app.get('/userList', function(req, res) {
+        
+        var User = models.users;
+
+        User.find({}).asc('name').run(function(err, users) {
+            if (err) throw err;
+
+            res.render('user/userList.jade', {
+                title: 'Userlist',
+                users: users
+            });
         });
     });
 
@@ -15,16 +22,17 @@ module.exports = function(app, models) {
 
         var User = models.user;
 
-        User.find({}).desc('username').run(function(err, user) {
+        User.find({}).desc('loginName').run(function(err, user) {
+
             if (err) throw err;
 
             res.render('user/userlist.jade', {
                 title: 'Userlist',
-                user: user
+                users: users
             });
 
             console.log('Loaded Users:');
-            console.log(user);
+            console.log(users);
         });
     });
 
@@ -53,6 +61,14 @@ module.exports = function(app, models) {
             req.user = user;
 
             next();
+        });
+    });
+
+    // Delete a user
+    app.get('/users/delete/:userid', function(req, res) {
+        var user = req.user;
+        user.remove(function(err) {
+            res.redirect('/userList');
         });
     });
 
