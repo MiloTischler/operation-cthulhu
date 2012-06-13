@@ -61,7 +61,7 @@ module.exports = function(app, models) {
     });
 
     //view single user
-    app.get('/users/:userid',utils.requiresUser, function(req, res){
+    app.get('/users/show/:userid',utils.requiresUser, function(req, res){
 
 
             res.render('user/single.jade', {
