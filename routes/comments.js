@@ -1,13 +1,14 @@
 module.exports = function(app, models) {
 
     // Write a new comment
-    app.post('/comments/:postid', function(req, res) {
+    app.post('/comments/:postid', utils.requiresUser, function(req, res) {
         var Comment = models.comments;
 
         var comment = new Comment();
         comment.post = req.post._id;
         comment.title = req.param('comment_title');
         comment.body = req.param('comment_body');
+        comment.user = req.session.user;
 
         comment.save(function(err) {
             if (err) {
@@ -19,7 +20,7 @@ module.exports = function(app, models) {
     });
 
     // Delete a comment
-    app.get('/comments/delete/:commentid', function(req, res) {
+    app.get('/comments/delete/:commentid', utils.requiresAdmin, function(req, res) {
         var comment = req.comment;
 
         comment.remove(function(err) {
