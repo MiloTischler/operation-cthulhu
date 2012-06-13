@@ -52,10 +52,23 @@ module.exports = function(app, models) {
     // Delete a user
     app.get('/users/delete/:userid', utils.requiresUser, function(req, res) {
         var user = req.user;
+        var deletedUser = req.user.name;
+      
         user.remove(function(err) {
-            req.flash('notice', 'Deleted successfully');
-            res.redirect('/user/list');
+            req.flash('notice', 'Deleted ' + deletedUser + ' successfully');
+            res.redirect('/users/list');
         });
+    });
+
+    //view single user
+    app.get('/users/:userid',utils.requiresUser, function(req, res){
+
+
+            res.render('user/single.jade', {
+            title: 'Update User: ' + req.user.name,
+            user: req.user
+        });
+
     });
 
     // Middleware for id param
