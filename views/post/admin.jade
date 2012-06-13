@@ -4,10 +4,10 @@ div#message!= messages()
     h3= title
     - each post in posts
       div.item
-        a(href='/posts/' + post._id)
-            div.title= post.title
-            div.buttons
-                a(href="")
-                    img(src="")
-                a(href="")
-                    img(src="")
+        div.title
+            a(href='/posts/' + post._id)= post.title
+        div.buttons
+            a(href='/posts/edit/' + post._id)
+                img(src="/img/edit.png")
+            a(href='/posts/delete/' + post._id)
+                img(src="/img/remove.png")
