@@ -6,8 +6,10 @@ module.exports = function(app, models) {
        // var User = models.users;
         res.render('userList.jade', {
             title: 'Userlist'
-        //    users: users
+            users: users
+
         });
+        console.log("hello my friend");
     });
 
     // handle userlist page
