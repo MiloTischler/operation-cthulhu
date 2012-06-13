@@ -1,15 +1,11 @@
-h1= title
-h2
-    a(href="/new/") New
-h2
-    a(href="/login/") Login
-h2
-    a(href="/userList/") Userlist
-h3= title
-#posts
+div#message != messages()
+
+#grid-view
+    h3= title
     - each post in posts
-      div.post
-        div.created_at= post.date
-        div.title 
-            a(href='/posts/' + post._id)!= post.title
-        div.body= post.body
+      div.item
+        a(href='/posts/' + post._id)
+            div.item-head
+                div.title= post.title
+                div.date= post.date.toDateString()
+            div.body!= post.body
