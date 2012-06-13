@@ -1,11 +1,13 @@
-div#message != messages()
+div#message!= messages()
 
 #grid-view
     h3= title
     - each post in posts
       div.item
         a(href='/posts/' + post._id)
-            div.item-head
-                div.title= post.title
-                div.date= post.date.toDateString()
-            div.body!= post.body
+            div.title= post.title
+            div.buttons
+                a(href="")
+                    img(src="")
+                a(href="")
+                    img(src="")
