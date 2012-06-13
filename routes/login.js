@@ -22,6 +22,7 @@ module.exports = function(app, models) {
             if (user.password == password) {
                 console.log("Login correct!")
                 req.session.loggedIn = true;
+                req.session.currentUser = user;
                 req.flash('info', 'LogIn successful');
                 res.redirect('/');
             } else {
@@ -32,5 +33,12 @@ module.exports = function(app, models) {
         });
     });
 
-    
+    // log out
+    app.get('/logout',function(req, res) {
+        req.session.loggedIn = false;
+        req.session.user = null;
+        req.flash('info', 'LogOut successful!');
+        res.redirect('/');
+    });
+
 }
