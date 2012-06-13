@@ -79,6 +79,8 @@ h1 {
   text-shadow: 1px 2px 2px #444;
 }
 h3 {
+  color: #648f88;
+  text-shadow: 1px 2px 2px #444;
   font-size: 24px;
 }
 #posts {
@@ -142,4 +144,21 @@ h3 {
 #grid-view .item .title a {
   text-decoration: none;
   color: #555;
+}
+#single-box {
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #bbb;
+  padding: 10px;
+}
+#single-box .button {
+  width: 300px;
+}
+#single-box .buttons {
+  width: 50px;
+  float: right;
 }
