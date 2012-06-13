@@ -1,12 +1,12 @@
 module.exports = function(app, models) {
 
-   // load userlist page
+    // load userlist page
     app.get('/userList', function(req, res) {
-        
-       // var User = models.users;
+
+        // var User = models.users;
         res.render('userList.jade', {
             title: 'Userlist'
-        //    users: users
+            //    users: users
         });
     });
 
@@ -14,7 +14,7 @@ module.exports = function(app, models) {
     app.post('/userList', function(req, res) {
 
         var User = models.user;
-   
+
         User.find({}).desc('username').run(function(err, user) {
             if (err) throw err;
 
@@ -25,6 +25,34 @@ module.exports = function(app, models) {
 
             console.log('Loaded Users:');
             console.log(user);
+        });
+    });
+
+    // edit a user
+    app.get('/user/:userid/edit', function(req, res) {
+        res.render('user/edit.jade', {
+            title: 'Update User: ' + req.user.name,
+            post: req.user
+        });
+    });
+
+    // edit a user
+    app.put('/user/:userid/edit', function(req, res) {
+        
+    });    
+
+    // Middleware for id param
+    app.param('userid', function(req, res, next, id) {
+        var User = models.users;
+        User.findOne({
+            _id: req.params.userid
+        }).run(function(err, user) {
+            if (err) return next(err);
+            if (!user) return next(new Error('Failed to load post ' + userid));
+
+            req.user = user;
+
+            next();
         });
     });
 
