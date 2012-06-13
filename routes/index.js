@@ -14,7 +14,7 @@ module.exports = function(app, models) {
 
             res.render('index.jade', {
                 title: 'Posts',
-                articles: posts
+                posts: posts
             });
 
             console.log('Loaded posts:');
@@ -139,6 +139,24 @@ module.exports = function(app, models) {
             user1: 'Milo',
             user2: 'Paul',
             user3: 'Jakob'
+        });
+    });
+
+    // handle userlist page
+    app.post('/userList', function(req, res) {
+
+        var User = models.user;
+   
+        User.find({}).desc('username').run(function(err, user) {
+            if (err) throw err;
+
+            res.render('userlist.jade', {
+                title: 'Userlist',
+                user: user
+            });
+
+            console.log('Loaded posts:');
+            console.log(posts);
         });
     });
 
