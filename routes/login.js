@@ -1,6 +1,5 @@
 module.exports = function(app, models) {
     // load login page
-
     app.get('/login', function(req, res) {
         res.render('user/login.jade', {
 
@@ -19,6 +18,7 @@ module.exports = function(app, models) {
         User.findOne({
             name: loginName
         }).run(function(err, user) {
+
             if (err) console.log("Login failed.");
             if (!user) console.log("Username incorrect!");
             if (user.password == password) {
@@ -26,19 +26,34 @@ module.exports = function(app, models) {
                 req.session.loggedIn = true;
                 req.session.currentUser = user;
                 req.flash('info', 'LogIn successful');
-                res.redirect('/');
+
+                // if someone tried to call a login protected function and has logged in afterwards
+                // redirect him to the former requested url
+                if (req.session.redirectAfterLogin != null) {
+                    var redirectTo = req.session.redirectAfterLogin; 
+                    req.session.redirectAfterLogin = null;
+                    res.redirect(redirectTo);
+                } else res.redirect('/');
+
             } else {
+
                 console.log("Login incorrect");
                 req.flash('info', 'Login incorrect!');
                 res.redirect('/login');
+
             };
         });
     });
 
     // log out
-    app.get('/logout',function(req, res) {
+    app.get('/logout', function(req, res) {
+
+        // delete session data
         req.session.loggedIn = false;
         req.session.user = null;
+        req.session.destroy();
+
+        // redirect to home
         req.flash('info', 'LogOut successful!');
         res.redirect('/');
     });

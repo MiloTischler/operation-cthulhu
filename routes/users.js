@@ -2,9 +2,9 @@ module.exports = function(app, models) {
 
 
 
-   // load userlist page
-    app.get('/userList', function(req, res) {
-        
+    // load userlist page
+    app.get('/userList', requiresLogin, function(req, res) {
+
         var User = models.users;
 
         User.find({}).asc('name').run(function(err, users) {
@@ -18,7 +18,7 @@ module.exports = function(app, models) {
     });
 
     // handle userlist page
-    app.post('/userList', function(req, res) {
+    app.post('/userList', requiresLogin, function(req, res) {
 
         var User = models.user;
 
