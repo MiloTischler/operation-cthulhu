@@ -56,7 +56,7 @@ module.exports = function(app, models) {
       
         user.remove(function(err) {
             req.flash('notice', 'Deleted ' + deletedUser + ' successfully');
-            res.redirect('users/list');
+            res.redirect('/users/list');
         });
     });
 

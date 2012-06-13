@@ -16,16 +16,16 @@ html
                 a(href="../") 
                     li home
                   - if (logincheck != true)
-                    a(href="login")
+                    a(href="../login")
                         li login
                   - if (logincheck == true)
-                    a(href="logout")
+                    a(href="../logout")
                         li logout
-                a(href="register")
+                a(href="../register")
                     li register
                 a(href="../users/list")
                     li users
-                a(href="../posts/new")
+                a(href="../posts/create")
                     li write post
 
         div#content!= body
