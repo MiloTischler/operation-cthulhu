@@ -12,7 +12,9 @@ module.exports = function(app, models) {
 
                 title: 'Userlist',
                 users: users,
-                locals: { user: req.user}
+                locals: {
+                    user: req.user
+                }
             });
         });
     });
@@ -53,7 +55,7 @@ module.exports = function(app, models) {
     app.get('/users/delete/:userid', utils.requiresUser, function(req, res) {
         var user = req.user;
         var deletedUser = req.user.name;
-      
+
         user.remove(function(err) {
             req.flash('notice', 'Deleted ' + deletedUser + ' successfully');
             res.redirect('/users/list');
@@ -61,10 +63,8 @@ module.exports = function(app, models) {
     });
 
     //view single user
-    app.get('/users/show/:userid',utils.requiresUser, function(req, res){
-
-
-            res.render('user/single.jade', {
+    app.get('/users/show/:userid', utils.requiresUser, function(req, res) {
+        res.render('user/single.jade', {
             title: 'Update User: ' + req.user.name,
             user: req.user
         });
@@ -86,4 +86,19 @@ module.exports = function(app, models) {
             next();
         });
     });
+
+    // Delete a user
+    app.get('/users/delete/:userid', utils.requiresUser, function(req, res) {
+        var user = req.user;
+        user.remove(function(err) {
+            res.redirect('/userList');
+        });
+    });
+
+    app.get('/users/admin', utils.requiresAdmin(models), function(req, res) {
+        res.render('user/admin.jade', {
+            title: 'Admin Panel: '
+        });
+    });
+
 }
