@@ -1,7 +1,7 @@
 module.exports = function(app, models) {
     // load registration page
     app.get('/register', function(req, res) {
-        res.render('register.jade', {
+        res.render('user/register.jade', {
             title: 'Registration'
         });
     });
@@ -26,9 +26,17 @@ module.exports = function(app, models) {
 
         // save user in db
         registeredUser.save(function(err) {
-            if (err) throw err;
+            if (err) {
+                if (err.code = 11000) {
+                    req.flash('info', 'Username already taken!');
+                    res.redirect('/register');
+                }
+            }
 
             console.log('New user saved.');
         });
+
+        req.flash('info', 'Registration successful!');
+        res.redirect('/register');
     });
 }

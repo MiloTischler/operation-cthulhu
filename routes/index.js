@@ -2,16 +2,17 @@ module.exports = function(app, models) {
 
     // Redirect to posts
     app.get('/', function(req, res) {
+        console.log("user is logged in: " + req.session.loggedIn);
         res.redirect('/posts');
     });
 
     // load userlist page
     app.get('/userList', function(req, res) {
-        
-       // var User = models.users;
+
+        // var User = models.users;
         res.render('userList.jade', {
             title: 'Userlist'
-        //    users: users
+            //    users: users
         });
     });
 
@@ -19,7 +20,7 @@ module.exports = function(app, models) {
     app.post('/userList', function(req, res) {
 
         var User = models.user;
-   
+
         User.find({}).desc('username').run(function(err, user) {
             if (err) throw err;
 
