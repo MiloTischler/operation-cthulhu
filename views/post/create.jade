@@ -1,11 +1,13 @@
-h1= title
-form( method="post")
-    div
+h3= title
+div#message!= messages()
+div#single-box
+    form( method="post")
         div
-            span Title :
-            input(type="text", name="title", id="editArticleTitle", value=post.title)
-        div
-            span Body :
-            textarea(name="body", rows=20, id="editArticleBody")= post.body
-        div#editArticleSubmit
-            input(type="submit", value="Send")
+            div
+                div Title :
+                input(type="text", name="title", id="editArticleTitle", value=post.title)
+            div
+                div Body :
+                textarea(name="body", rows=20, id="editArticleBody")= post.body
+            div#editArticleSubmit
+                input(type="submit", value="Send")
