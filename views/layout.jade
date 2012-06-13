@@ -15,16 +15,18 @@ html
             ul
                 a(href="/") 
                     li home
-                - if (logincheck != true)
+                  - if (logincheck != true)
                     a(href="/users/login")
                         li login
-                - if (logincheck == true)
+                  - if (logincheck == true)
                     a(href="/users/logout")
                         li logout
-                a(href="/users/register")
-                    li register
-                a(href="/users/admin")
-                    li Admin
+                  - if (isAdmin == 'admin' || !noAdmin)
+                    a(href="/users/admin")
+                        li Admin
+                  - if (logincheck != true)
+                    a(href="/users/register")
+                        li register
                 a(href="/users/list")
                     li users
                 a(href="/posts/create")
