@@ -18,8 +18,11 @@
 
      // Write a new post
      app.get('/posts/new', function(req, res) {
+         var Post = models.posts;
+
          res.render('post/create.jade', {
-             title: 'New Post'
+             title: 'New Post',
+             post: new Post()
          });
      });
 
@@ -31,12 +34,19 @@
          post.title = req.param('title');
          post.body = req.param('body');
 
-         post.save(function(err, post) {
-             if (err) throw err;
+         post.save(function(err) {
+             if (err) {
+                 utils.mongooseErrorHandler(err, req);
 
-             console.log('Saved post: ' + post);
+                 res.render('post/create.jade', {
+                     title: 'New Post',
+                     post: post
+                 });
+             } else {
+                 console.log('Saved post: ' + post);
 
-             res.redirect('/posts');
+                 res.redirect('/posts');
+             }
          });
      });
 
@@ -81,7 +91,7 @@
          post.title = req.param('title');
          post.body = req.param('body');
 
-         post.save(function(err, post) {
+         post.save(function(err) {
              if (err) throw err;
 
              console.log('Updated post: ' + post);
@@ -105,9 +115,7 @@
 
          Post.findOne({
              _id: req.params.postid
-         })
-         .populate('user')
-         .run(function(err, post) {
+         }).populate('user').run(function(err, post) {
              if (err) return next(err);
              if (!post) return next(new Error('Failed to load post ' + postid));
 
@@ -115,11 +123,12 @@
 
              var Comment = models.comments;
 
-             Comment.find({post : req.post})
-             .run(function(err, comments) {
-                if(err) throw err;
-                req.comments = comments;
-                next();
+             Comment.find({
+                 post: req.post
+             }).run(function(err, comments) {
+                 if (err) throw err;
+                 req.comments = comments;
+                 next();
              });
          });
      });

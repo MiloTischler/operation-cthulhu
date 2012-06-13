@@ -25,7 +25,7 @@ module.exports = function(app, models) {
         registeredUser.password = password;
 
         // save user in db
-        registeredUser.save(function(err) {
+        registeredUser.save(function(err, user) {
             if (err) {
                 if (err.code = 11000) {
                     req.flash('info', 'Username already taken!');

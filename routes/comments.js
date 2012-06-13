@@ -8,8 +8,10 @@ module.exports = function(app, models) {
         comment.body = req.param('comment_body');
 
         comment.save(function (err) {
-            if(err) throw err;
-
+            if(err) {
+                utils.mongooseErrorHandler(err, req);
+            } 
+            
             res.redirect('/posts/' + req.post._id);
         })
     });
