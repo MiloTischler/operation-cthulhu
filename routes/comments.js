@@ -8,7 +8,7 @@ module.exports = function(app, models) {
         comment.post = req.post._id;
         comment.title = req.param('comment_title');
         comment.body = req.param('comment_body');
-        comment.user = req.session.user;
+        comment.user = req.session.currentUser._id;
 
         comment.save(function(err) {
             if (err) {

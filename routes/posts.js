@@ -33,7 +33,7 @@
 
          post.title = req.param('title');
          post.body = req.param('body');
-         post.user = req.session.user;
+         post.user = req.session.currentUser._id;
 
          post.save(function(err) {
              if (err) {
@@ -71,7 +71,9 @@
      });
 
      // View a single post
-     app.get('/posts/:postid', function(req, res) {
+     app.get('/posts/:postid', utils.requiresUser, function(req, res) {
+         console.log('LOL:' + req.comments);
+         
          res.render('post/view.jade', {
              title: 'Blog entry',
              post: req.post,
@@ -93,7 +95,7 @@
 
          post.title = req.param('title');
          post.body = req.param('body');
-         post.user = req.session.user;
+         post.user = req.session.currentUser._id;
 
          post.save(function(err) {
              if (err) {
@@ -138,7 +140,7 @@
 
              Comment.find({
                  post: req.post
-             }).run(function(err, comments) {
+             }).populate('user').run(function(err, comments) {
                  if (err) throw err;
                  req.comments = comments;
                  next();
