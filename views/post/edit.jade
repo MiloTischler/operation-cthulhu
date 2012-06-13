@@ -12,3 +12,10 @@ form( method="post")
             input(type="submit", value="Send")
 
         input(type="hidden", name="post[_id]", value=post._id)
+
+        &nbsp;
+
+a(class='destroy', href='/posts/delete/'+post._id, title="delete") Delete
+&nbsp;
+a(href='/posts', title="cancel") Cancel
+
