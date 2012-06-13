@@ -54,7 +54,7 @@
 
 
      // Admin posts
-     app.get('/posts/admin', utils.requiresAdmin, function(req, res) {
+     app.get('/posts/admin', utils.requiresAdmin(models), function(req, res) {
          var Post = models.posts;
 
          Post.find({}).desc('date').run(function(err, posts) {
@@ -82,7 +82,7 @@
      });
 
      // Update a post
-     app.get('/posts/edit/:postid', utils.requiresAdmin, function(req, res) {
+     app.get('/posts/edit/:postid', utils.requiresAdmin(models), function(req, res) {
          res.render('post/edit.jade', {
              title: 'Update Post: ' + req.post.title,
              post: req.post,
@@ -90,7 +90,7 @@
          });
      })
 
-     app.put('/posts/edit/:postid', utils.requiresAdmin, function(req, res) {
+     app.put('/posts/edit/:postid', utils.requiresAdmin(models), function(req, res) {
          var post = req.post;
 
          post.title = req.param('title');
@@ -116,7 +116,7 @@
      });
 
      // Delete a post
-     app.get('/posts/delete/:postid', utils.requiresAdmin, function(req, res) {
+     app.get('/posts/delete/:postid', utils.requiresAdmin(models), function(req, res) {
          var post = req.post;
          post.remove(function(err) {
              req.flash('notice', 'Deleted successfully');
