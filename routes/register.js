@@ -29,6 +29,7 @@ module.exports = function(app, models) {
             if (err) throw err;
 
             console.log('New user saved.');
+            res.redirect('/posts');
         });
     });
 }

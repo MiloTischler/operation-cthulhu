@@ -22,7 +22,6 @@ module.exports = function(app, models) {
                 else console.log("Incorrect password");
         });
 
-
         console.log("user: " + loginName + " pw: " + password);
     });
 }

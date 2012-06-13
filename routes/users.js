@@ -15,8 +15,6 @@ module.exports = function(app, models) {
 
             });
             console.log('user:');
-
-
         });
          console.log('user:2');
     });
