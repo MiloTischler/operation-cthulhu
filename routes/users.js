@@ -10,13 +10,11 @@ module.exports = function(app, models) {
             if (err) throw err;
 
             res.render('user/userList.jade', {
-                title: 'Hullahoop',
-                users: users
 
+                title: 'Userlist',
+                users: users
             });
-            console.log('user:');
         });
-         console.log('user:2');
     });
 
     // handle userlist page
@@ -24,8 +22,8 @@ module.exports = function(app, models) {
 
         var User = models.user;
 
+        User.find({}).desc('loginName').run(function(err, user) {
 
-        User.find({}).desc('username').run(function(err, user) {
             if (err) throw err;
 
             res.render('user/userlist.jade', {
@@ -39,7 +37,7 @@ module.exports = function(app, models) {
     });
 
     // edit a user
-    app.get('/user/:userid/edit', function(req, res) {
+    app.get('/user/edit/:userid', function(req, res) {
         res.render('user/edit.jade', {
             title: 'Update User: ' + req.user.name,
             user: req.user
@@ -47,14 +45,17 @@ module.exports = function(app, models) {
     });
 
     // edit a user
-    app.put('/user/:userid/edit', function(req, res) {
-        var user = req.user;
+    app.put('/user/edit/:userid', function(req, res) {
+        var user = req.user
 
-        var userName = req.param('userName', null);
-
-        user.set(user.name, userName);
-
-        req.redirect('/userList');
+        user.name = req.param('UserName', null);
+        user.password = req.param('password', null);
+        // change user in db
+        user.save(function(err, user) {
+             if (err) throw err;
+             console.log('Updated User: ' + user);
+             res.redirect('/userList');
+         });
     });
 
     // Middleware for id param
@@ -73,6 +74,12 @@ module.exports = function(app, models) {
         });
     });
 
- 
+    // Delete a user
+    app.get('/users/delete/:userid', function(req, res) {
+        var user = req.user;
+        user.remove(function(err) {
+            res.redirect('/userList');
+        });
+    });
 
 }
