@@ -18,8 +18,11 @@
 
      // Write a new post
      app.get('/posts/new', function(req, res) {
+         var Post = models.posts;
+
          res.render('post/create.jade', {
-             title: 'New Post'
+             title: 'New Post',
+             post: new Post()
          });
      });
 
@@ -31,12 +34,20 @@
          post.title = req.param('title');
          post.body = req.param('body');
 
-         post.save(function(err, post) {
-             if (err) throw err;
+         post.save(function(err) {
+             if (err) {
+                 utils.mongooseErrorHandler(err, req);
 
-             console.log('Saved post: ' + post);
+                 res.render('post/create.jade', {
+                     title: 'New Post',
+                     post: post
+                 });
+             } else {
+                 console.log('Saved post: ' + post);
 
-             res.redirect('/posts');
+                 req.flash('notice', 'Saved successfully');
+                 res.redirect('/posts');
+             }
          });
      });
 
@@ -71,7 +82,8 @@
      app.get('/posts/edit/:postid', function(req, res) {
          res.render('post/edit.jade', {
              title: 'Update Post: ' + req.post.title,
-             post: req.post
+             post: req.post,
+             comments: req.comments
          });
      })
 
@@ -81,12 +93,20 @@
          post.title = req.param('title');
          post.body = req.param('body');
 
-         post.save(function(err, post) {
-             if (err) throw err;
+         post.save(function(err) {
+             if (err) {
+                 utils.mongooseErrorHandler(err, req);
 
-             console.log('Updated post: ' + post);
+                 res.render('post/edit.jade', {
+                     title: 'Update Post: ' + req.post.title,
+                     post: post
+                 });
+             } else {
+                 console.log('Updated post: ' + post);
 
-             res.redirect('/posts/' + post._id);
+                 req.flash('notice', 'Edited successfully');
+                 res.redirect('/posts/' + post._id);
+             }
          });
 
      });
@@ -95,6 +115,7 @@
      app.get('/posts/delete/:postid', function(req, res) {
          var post = req.post;
          post.remove(function(err) {
+             req.flash('notice', 'Deleted successfully');
              res.redirect('/posts/admin');
          });
      });
@@ -105,9 +126,7 @@
 
          Post.findOne({
              _id: req.params.postid
-         })
-         .populate('user')
-         .run(function(err, post) {
+         }).populate('user').run(function(err, post) {
              if (err) return next(err);
              if (!post) return next(new Error('Failed to load post ' + postid));
 
@@ -115,11 +134,12 @@
 
              var Comment = models.comments;
 
-             Comment.find({post : req.post})
-             .run(function(err, comments) {
-                if(err) throw err;
-                req.comments = comments;
-                next();
+             Comment.find({
+                 post: req.post
+             }).run(function(err, comments) {
+                 if (err) throw err;
+                 req.comments = comments;
+                 next();
              });
          });
      });

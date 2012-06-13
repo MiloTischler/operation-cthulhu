@@ -25,7 +25,7 @@ module.exports = function(app, models) {
         registeredUser.password = password;
 
         // save user in db
-        registeredUser.save(function(err) {
+        registeredUser.save(function(err, user) {
             if (err) {
                 if (err.code = 11000) {
                     req.flash('info', 'Username already taken!');
@@ -33,10 +33,8 @@ module.exports = function(app, models) {
                 }
             }
 
-            console.log('New user saved.');
+            req.flash('info', 'Registration successful!');
+            res.redirect('/register');
         });
-
-        req.flash('info', 'Registration successful!');
-        res.redirect('/register');
     });
 }

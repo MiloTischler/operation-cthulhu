@@ -5,9 +5,9 @@ div#single-box
         div
             div
                 div Title :
-                input(type="text", name="title", id="editArticleTitle")
+                input(type="text", name="title", id="editArticleTitle", value=post.title)
             div
                 div Body :
-                textarea(name="body", rows=20, id="editArticleBody")
+                textarea(name="body", rows=20, id="editArticleBody")= post.body
             div#editArticleSubmit
                 input(type="submit", value="Send")

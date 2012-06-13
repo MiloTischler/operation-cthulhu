@@ -1,1 +1,15 @@
-h1= title
+h3= title
+form( method="post", action="/user/edit/" + user.id)
+    input(name='_method', value='PUT', type='hidden')
+    table(width="100px")
+        tr
+            td
+                span UserName :
+                input(type="text", name="UserName", id="UserName")
+        tr
+            td
+                span Password :
+                input(type="password", name="password", id="password")
+        tr
+            td
+                input(type="submit", value="Send" , id="editButton")

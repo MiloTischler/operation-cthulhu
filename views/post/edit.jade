@@ -21,3 +21,5 @@ div#single-box
             input(type="hidden", name="post[_id]", value=post._id)
 
 
+!= partial('../comment/admin', {collection : comments, as : 'comment'})
+
