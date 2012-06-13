@@ -5,8 +5,8 @@ module.exports = function(mongoose) {
 
   var schema = new Schema({
     name : { type: String, required: 'true' },
-    password : { type: String, required: 'true' },
-    role : { type: String, required: 'true' }
+    password : { type: String, required: 'true' }
+    //role : { type: String, required: 'true' }
   });
 
   this.model = mongoose.model(collection, schema);
