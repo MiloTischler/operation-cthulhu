@@ -1,6 +1,8 @@
 var express = require('express');
 var fs = require('fs');
 
+utils = require('./lib/utils');
+
 var app = module.exports = express.createServer();
 
 app.mongoose = require('mongoose');
