@@ -57,6 +57,12 @@ module.exports = function(app, express, mongoose) {
     }
   });
 
+  app.dynamicHelpers({
+    noAdmin: function(req) {
+      return req.session.noAdmin;
+    }
+  });
+
   app.configure('production', function() {
     app.use(express.errorHandler());
   });

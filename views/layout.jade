@@ -21,9 +21,8 @@ html
                   - if (logincheck == true)
                     a(href="/users/logout")
                         li logout
-                  - if (isAdmin == 'admin')
-                    a(href="/users/admin")
-                        li Admin
+                a(href="/users/admin")
+                    li Admin
                   - if (logincheck != true)
                     a(href="/users/register")
                         li register
