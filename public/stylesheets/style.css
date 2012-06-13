@@ -9,6 +9,13 @@ body {
   height: 100px;
   width: 960px;
 }
+#logo {
+  float: left;
+}
+#blog-title h1 {
+  padding: 20px;
+  color: #648f88;
+}
 #menu {
   width: 959px;
   height: 30px;
@@ -50,43 +57,60 @@ body {
   border-radius: 15px;
 }
 #content {
-  width: 960px;
-  padding: 20px;
+  width: 920px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 #footer {
+  border-top: 2px solid #444;
   width: 960px;
-  height: 50px;
+  height: 40px;
 }
-h1,
-h2 {
-  margin: 0;
-  font-size: 22px;
-  color: #343434;
-}
-h3 {
-  font-size: 25px;
+#footer div {
+  text-align: center;
+  margin: 10px;
 }
 h1 {
-  text-shadow: 1px 2px 2px #ddd;
+  margin: 0;
   font-size: 60px;
+  color: #648f88;
+  text-shadow: 1px 2px 2px #444;
+}
+h3 {
+  font-size: 24px;
 }
 #posts {
   text-align: left;
   margin-left: auto;
   margin-right: auto;
-  width: 320px;
+  width: 800px;
 }
-#posts .post {
-  margin: 20px;
+#posts .item {
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #bbb;
+  margin: 20px 0;
 }
-#posts .post .created_at {
-  display: block;
+#posts .item a {
+  text-decoration: none;
+  color: #555;
 }
-#posts .post .title {
+#posts .item a .item-head {
+  overflow: hidden;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+#posts .item a .item-head .date {
+  width: 180px;
+  float: right;
+}
+#posts .item a .item-head .title {
+  width: 500px;
+  float: left;
   font-weight: bold;
-  text-decoration: underline;
-  background-color: #eee;
 }
-#posts .post .body {
-  background-color: #ffa;
+#posts .item a .body {
+  padding: 10px;
 }
