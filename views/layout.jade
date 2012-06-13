@@ -27,6 +27,10 @@ html
                     li users
                 a(href="../posts/create")
                     li write post
+              - if (logincheck == true)       
+                div#login-name
+                    span logged in as: 
+                    span= currentUser
 
         div#content!= body
         div#footer

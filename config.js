@@ -45,6 +45,13 @@ module.exports = function(app, express, mongoose) {
         }
     });
 
+        app.dynamicHelpers ({
+        currentUser: function (req, res) {
+          if (req.session.loggedIn)
+            return req.session.currentUser.name;
+        }
+    });
+
   app.configure('production', function() {
     app.use(express.errorHandler());
   });
