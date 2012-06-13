@@ -17,7 +17,7 @@
      });
 
      // Write a new post
-     app.get('/posts/create', utils.requiresAdmin, function(req, res) {
+     app.get('/posts/create', utils.requiresAdmin(models), function(req, res) {
          var Post = models.posts;
 
          res.render('post/create.jade', {
@@ -26,7 +26,7 @@
          });
      });
 
-     app.post('/posts/create', utils.requiresAdmin, function(req, res) {
+     app.post('/posts/create', utils.requiresAdmin(models), function(req, res) {
          var Post = models.posts;
 
          var post = new Post();
