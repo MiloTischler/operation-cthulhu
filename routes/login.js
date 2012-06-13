@@ -15,6 +15,7 @@ module.exports = function(app, models) {
         console.log("user: " + loginName + " pw: " + password);
 
         var User = models.users;
+
         User.findOne({
             name: loginName
         }).run(function(err, user) {

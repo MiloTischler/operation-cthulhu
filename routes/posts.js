@@ -45,6 +45,7 @@
              } else {
                  console.log('Saved post: ' + post);
 
+                 req.flash('notice', 'Saved successfully');
                  res.redirect('/posts');
              }
          });
@@ -92,11 +93,19 @@
          post.body = req.param('body');
 
          post.save(function(err) {
-             if (err) throw err;
+             if (err) {
+                 utils.mongooseErrorHandler(err, req);
 
-             console.log('Updated post: ' + post);
+                 res.render('post/edit.jade', {
+                     title: 'Update Post: ' + req.post.title,
+                     post: post
+                 });
+             } else {
+                console.log('Updated post: ' + post);
 
-             res.redirect('/posts/' + post._id);
+                req.flash('notice', 'Edited successfully');
+                res.redirect('/posts/' + post._id);
+             }
          });
 
      });
@@ -105,6 +114,7 @@
      app.get('/posts/delete/:postid', function(req, res) {
          var post = req.post;
          post.remove(function(err) {
+             req.flash('notice', 'Deleted successfully');
              res.redirect('/posts/admin');
          });
      });
