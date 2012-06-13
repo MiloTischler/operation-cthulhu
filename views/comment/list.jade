@@ -1,8 +1,11 @@
 p 
-  != comment.title
-  br   
-  != comment.body
+  span title: 
+  span!= comment.title
+  br  
+  span text: 
+  span!= comment.body
   br
-  != comment.user.name
+  span author: 
+  span!= comment.user.name
   br
 hr
