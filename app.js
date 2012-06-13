@@ -13,6 +13,7 @@ var models = {};
 models.posts = require('./models/post')(app.mongoose).model;
 models.users = require('./models/user')(app.mongoose).model;
 
+
 require('./routes/index.js')(app, models);
 require('./routes/posts.js')(app, models);
 require('./routes/register.js')(app, models);
