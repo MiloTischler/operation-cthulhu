@@ -34,5 +34,4 @@ module.exports = function(app, models) {
             console.log(user);
         });
     });
-
 }
