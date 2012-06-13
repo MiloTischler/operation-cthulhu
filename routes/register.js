@@ -1,7 +1,7 @@
 module.exports = function(app, models) {
     // load registration page
     app.get('/register', function(req, res) {
-        res.render('register.jade', {
+        res.render('user/register.jade', {
             title: 'Registration'
         });
     });
