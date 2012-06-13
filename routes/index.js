@@ -22,6 +22,71 @@ module.exports = function(app, models) {
         });
     });
 
+    // Write a new post
+    app.get('/posts/new', function(req, res) {
+        res.render('blog_new.jade', {title: 'New Post'});
+    })
+
+    app.post('/posts/new', function(req, res) {
+        var Post = models.posts;
+
+        var post = new Post();
+        post.title = req.param('title');
+        post.body = req.param('body');
+
+        post.save(function(err) {
+            if(err) throw err;
+
+            console.log('Saved post..');
+        })
+
+        res.redirect('/posts');
+    });
+
+    // View a single post
+    app.get('/posts/:id', function(req, res) {
+        var Post = models.posts;
+
+        Post.findOne({_id : req.params.id}, function(err, post) {
+            if(err) throw err;
+
+            console.log('View post: ' + post);
+
+            res.render('article.jade', {title : 'Blog entry', post : post})
+        });
+    });
+
+    // Update a post
+    app.get('/posts/:id/edit', function(req, res) {
+        var Post = models.posts;
+
+
+        Post.findOne({_id : req.params.id}, function(err, post) {
+            if(err) throw err;
+
+            console.log('update post: ' + post);
+
+            res.render('blog_update.jade', {title: 'Update Post: ' + post.title, post : post});
+        });
+    })
+
+    app.put('/posts/:id/edit', function(req, res) {
+        console.log("HMM: " + req.post);
+    });
+
+    // Middleware for id param
+    app.param('id', function(req, res, next, id) {
+        var Post = models.posts;
+        Post.findOne({_id : req.params.id}).run(function(err, post) {
+            if(err) return next(err);
+            if(!post) return next(new Error('Failed to load post ' + id));
+
+            req.post = post;
+
+            next();
+        });
+    });
+
     // load login page
     app.get('/login', function(req, res) {
         res.render('login.jade', {
@@ -46,12 +111,26 @@ module.exports = function(app, models) {
 
     // registration handler
     app.post('/register', function(req, res) {
+
         var loginName = req.param('loginName', null);
         var password = req.param('password', null);
         var passwordRepeat = req.param('passwordRepeat', null);
 
+        if (password != passwordRepeat) {
+            console.log("Flash should appear!");
+            req.flash('info', 'Passwords must be the same!');
+            res.redirect('/register');
+        }
+
+        var User = models.users;
+        var registeredUser = new User();
+        registeredUser.name = loginName;
+        registeredUser.password = password;
+
+        // now kiss
         console.log("user: " + loginName + " pw: " + password + " pwr: " + passwordRepeat);
     });
+
 
     // load userlist page
     app.get('/userList', function(req, res) {
@@ -62,7 +141,6 @@ module.exports = function(app, models) {
             user3: 'Jakob'
         });
     });
-
 
 
 }
