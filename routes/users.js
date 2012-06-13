@@ -95,8 +95,10 @@ module.exports = function(app, models) {
         });
     });
 
-    app.get('/users/admin', utils.requiresAdmin, function(req, res) {
-        res.render('user/admin.jade');
+    app.get('/users/admin', utils.requiresAdmin(models), function(req, res) {
+        res.render('user/admin.jade', {
+            title: 'Admin Panel: '
+        });
     });
 
 }

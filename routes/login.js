@@ -2,11 +2,13 @@ module.exports = function(app, models) {
     // load login page
     app.get('/users/login', function(req, res) {
         res.render('user/login.jade', {
-            locals: { user: req.user, title: 'Login' }
-            
+            locals: {
+                user: req.user,
+                title: 'Login'
+            }
+
         });
     });
-    
 
 
 
@@ -27,7 +29,7 @@ module.exports = function(app, models) {
             if (!user) {
                 console.log("Username incorrect!")
                 req.flash('info', 'Login incorrect!');
-                res.redirect('/login');
+                res.redirect('/users/login');
             } else if (user.password == password) {
                 console.log("Login correct!")
                 req.session.loggedIn = true;
@@ -46,7 +48,7 @@ module.exports = function(app, models) {
 
                 console.log("Login incorrect");
                 req.flash('info', 'Login incorrect!');
-                res.redirect('/login');
+                res.redirect('/users/login');
 
             };
         });
