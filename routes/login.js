@@ -31,7 +31,7 @@ module.exports = function(app, models) {
                 // if someone tried to call a login protected function and has logged in afterwards
                 // redirect him to the former requested url
                 if (req.session.redirectAfterLogin != null) {
-                    var redirectTo = req.session.redirectAfterLogin; 
+                    var redirectTo = req.session.redirectAfterLogin;
                     req.session.redirectAfterLogin = null;
                     res.redirect(redirectTo);
                 } else res.redirect('/');
@@ -54,7 +54,7 @@ module.exports = function(app, models) {
         req.session.user = null;
 
         // redirect to home
-        req.flash('info', 'LogOut successful!');
+        req.flash('info', 'Logout successful!');
         res.redirect('/');
     });
 
