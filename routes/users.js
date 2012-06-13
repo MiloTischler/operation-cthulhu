@@ -58,8 +58,10 @@ module.exports = function(app, models) {
     app.get('/users/delete/:userid', utils.requiresUser, function(req, res) {
         var user = req.user;
         user.remove(function(err) {
-            res.redirect('/userList');
+          //  req.flash('info', 'User successfully removed');
+            res.redirect('/user/list');
         });
+       // req.flash('info', 'User successfully removed');
     });
 
 }
