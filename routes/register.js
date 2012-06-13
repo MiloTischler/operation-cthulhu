@@ -18,6 +18,7 @@ module.exports = function(app, models) {
             console.log("Flash should appear!");
             req.flash('info', 'Passwords must be the same!');
             res.redirect('/users/register');
+
         } else {
 
             var User = models.users;
@@ -25,6 +26,7 @@ module.exports = function(app, models) {
             registeredUser.name = loginName;
             registeredUser.password = password;
             registeredUser.role = role;
+
 
             // save user in db
             registeredUser.save(function(err, user) {
@@ -56,6 +58,7 @@ module.exports = function(app, models) {
             console.log("Flash should appear!");
             req.flash('info', 'Passwords must be the same!');
             res.redirect('/users/register');
+
         } else {
             console.log("step 1");
             var User = models.users;
