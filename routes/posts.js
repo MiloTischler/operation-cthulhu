@@ -21,7 +21,7 @@
          res.render('post/create.jade', {
              title: 'New Post'
          });
-     })
+     });
 
      app.post('/posts/new', function(req, res) {
          var Post = models.posts;
@@ -40,23 +40,41 @@
          });
      });
 
+
+     // Admin posts
+     app.get('/posts/admin', function(req, res) {
+         var Post = models.posts;
+
+         Post.find({}).desc('date').run(function(err, posts) {
+             if (err) throw err;
+
+             res.render('post/admin.jade', {
+                 title: 'Admin Posts',
+                 posts: posts
+             });
+
+             console.log('Loaded posts:');
+             console.log(posts);
+         });
+     });
+
      // View a single post
      app.get('/posts/:postid', function(req, res) {
          res.render('post/view.jade', {
              title: 'Blog entry',
              post: req.post
-         })
+         });
      });
 
      // Update a post
-     app.get('/posts/:postid/edit', function(req, res) {
+     app.get('/posts/edit/:postid', function(req, res) {
          res.render('post/edit.jade', {
              title: 'Update Post: ' + req.post.title,
              post: req.post
          });
      })
 
-     app.put('/posts/:postid/edit', function(req, res) {
+     app.put('/posts/edit/:postid', function(req, res) {
          var post = req.post;
 
          post.title = req.param('title');
@@ -72,9 +90,18 @@
 
      });
 
-     // Middleware for id param
+     // Delete a post
+     app.get('/posts/delete/:postid', function(req, res) {
+         var post = req.post;
+         post.remove(function(err) {
+             res.redirect('/posts');
+         });
+     });
+
+     // Middleware for postid param
      app.param('postid', function(req, res, next, id) {
          var Post = models.posts;
+
          Post.findOne({
              _id: req.params.postid
          }).run(function(err, post) {

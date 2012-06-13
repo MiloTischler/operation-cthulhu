@@ -16,6 +16,11 @@ module.exports = function(app, models) {
             });
             console.log('user:');
 
+
+        // var User = models.users;
+        res.render('user/userList.jade', {
+            title: 'Userlist'
+            //    users: users
         });
          console.log('user:2');
     });
@@ -29,7 +34,7 @@ module.exports = function(app, models) {
         User.find({}).desc('username').run(function(err, user) {
             if (err) throw err;
 
-            res.render('userlist.jade', {
+            res.render('user/userlist.jade', {
                 title: 'Userlist',
                 users: users
             });
@@ -49,8 +54,8 @@ module.exports = function(app, models) {
 
     // edit a user
     app.put('/user/:userid/edit', function(req, res) {
-        
-    });    
+        res.redirect('/userList');
+    });
 
     // Middleware for id param
     app.param('userid', function(req, res, next, id) {

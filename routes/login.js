@@ -1,7 +1,7 @@
 module.exports = function(app, models) {
     // load login page
     app.get('/login', function(req, res) {
-        res.render('login.jade', {
+        res.render('user/login.jade', {
             title: 'Login'
         });
     });
@@ -13,13 +13,14 @@ module.exports = function(app, models) {
 
         var User = models.users;
 
-        User.findOne({_id: loginName}).run(function(err, users) {
-            if (err) throw err;
-            console.log('found user:');
+        User.findOne({
+            name: loginName
+        }).run(function(err, user) {
+            if (err) console.log("Login failed.");
+            if (!user) console.log("Username incorrect!");
+            if (user.password = password) console.log("Login correct!");
         });
 
-            //check if login is correct
-       
 
         console.log("user: " + loginName + " pw: " + password);
     });
