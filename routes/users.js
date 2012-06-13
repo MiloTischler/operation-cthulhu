@@ -56,11 +56,19 @@ module.exports = function(app, models) {
             _id: req.params.userid
         }).run(function(err, user) {
             if (err) return next(err);
-            if (!user) return next(new Error('Failed to load post ' + userid));
+            if (!user) return next(new Error('Failed to load User ' + userid));
 
             req.user = user;
 
             next();
+        });
+    });
+
+    // Delete a user
+    app.get('/users/delete/:userid', function(req, res) {
+        var user = req.user;
+        user.remove(function(err) {
+            res.redirect('/users/userList');
         });
     });
 
