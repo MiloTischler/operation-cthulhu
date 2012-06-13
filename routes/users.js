@@ -25,11 +25,6 @@ module.exports = function(app, models) {
 
             if (err) throw err;
 
-            res.render('user/userlist.jade', {
-                title: 'Userlist',
-                users: users
-            });
-
             console.log('Loaded Users:');
             console.log(users);
         });
