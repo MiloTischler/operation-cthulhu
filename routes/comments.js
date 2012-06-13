@@ -1,7 +1,7 @@
 module.exports = function(app, models) {
 
     // Write a new comment
-    app.post('/comments/:postid', utils.requiresUser, function(req, res) {
+    app.post('/comments/create/:postid', utils.requiresUser, function(req, res) {
         var Comment = models.comments;
 
         var comment = new Comment();
