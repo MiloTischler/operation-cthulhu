@@ -4,18 +4,30 @@ module.exports = function(app, models) {
     app.get('/users/list', utils.requiresUser, function(req, res) {
 
         var User = models.users;
+        var isAdmin = 'admin';
+        
 
         User.find({}).asc('name').run(function(err, users) {
             if (err) throw err;
 
-            res.render('user/list.jade', {
+            if (req.session.currentUser.role != isAdmin)
+            {
+                res.render('user/list.jade', {
 
-                title: 'Userlist',
-                users: users,
-                locals: {
-                    user: req.user
-                }
-            });
+                    title: 'Userlist',
+                    users: users,
+                    locals: { user: req.user}
+                });
+            } 
+            else
+            {
+                res.render('user/adminlist.jade', {
+
+                    title: 'Userlist',
+                    users: users,
+                    locals: { user: req.user}
+                });  
+            }
         });
     });
 
