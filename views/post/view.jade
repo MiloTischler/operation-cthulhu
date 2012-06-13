@@ -3,3 +3,6 @@ div.post
     div.created_at= post.date
     div.title= post.title
     div.body= post.body
+
+!= partial('../comment/list', {collection : comments, as : 'comment'})
+!= partial('../comment/create')
