@@ -5,7 +5,7 @@ module.exports = function(mongoose) {
 
   var schema = new Schema({
     id: ObjectId,
-    name : { type: String, required: 'true' },
+    name : { type: String, required: 'true', unique: 'true' },
     password : { type: String, required: 'true' }
   });
 
