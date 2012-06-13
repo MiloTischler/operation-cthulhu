@@ -11,6 +11,8 @@ module.exports = function(app, models) {
         var loginName = req.param('loginName', null);
         var password = req.param('password', null);
 
+        console.log("user: " + loginName + " pw: " + password);
+
         var User = models.users;
 
         User.findOne({
@@ -19,9 +21,8 @@ module.exports = function(app, models) {
             if (err) console.log("Login failed.");
             if (!user) console.log("Username incorrect!");
             if (user.password == password) console.log("Login correct!")
-                else console.log("Incorrect password");
-        });
 
-        console.log("user: " + loginName + " pw: " + password);
+            else console.log("Login incorrect");
+        });
     });
 }

@@ -48,7 +48,13 @@ module.exports = function(app, models) {
 
     // edit a user
     app.put('/user/:userid/edit', function(req, res) {
-        res.redirect('/userList');
+        var user = req.user;
+
+        var userName = req.param('userName', null);
+
+        user.set(user.name, userName);
+
+        req.redirect('/userList');
     });
 
     // Middleware for id param
@@ -67,5 +73,7 @@ module.exports = function(app, models) {
             next();
         });
     });
+
+ 
 
 }

@@ -26,7 +26,12 @@ module.exports = function(app, models) {
 
         // save user in db
         registeredUser.save(function(err) {
-            if (err) throw err;
+            if (err) {
+                if (err.code = 11000) {
+                    req.flash('info', 'Username already taken!');
+                    res.redirect('/register');
+                }
+            }
 
             console.log('New user saved.');
             res.redirect('/posts');
