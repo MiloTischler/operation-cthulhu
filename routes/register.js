@@ -60,7 +60,7 @@ module.exports = function(app, models) {
             res.redirect('/users/register');
 
         } else {
-            console.log("step 1");
+            
             var User = models.users;
             var registeredUser = new User();
             registeredUser.name = loginName;
@@ -73,11 +73,11 @@ module.exports = function(app, models) {
                 if (err) {
                     if (err.code == 11000) {
                         req.flash('info', 'Username already taken!');
-                        res.redirect('/users/register');
+                        res.redirect('/users/admin');
                     }
                 } else {
                     req.flash('info', 'Registration successful!');
-                    res.redirect('/users/register');
+                    res.redirect('/users/admin');
                 }
             });
         }
