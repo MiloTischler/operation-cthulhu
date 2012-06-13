@@ -20,6 +20,6 @@ div#single-box
                 input(type="submit", value="Send")
             input(type="hidden", name="post[_id]", value=post._id)
 
-
-!= partial('../comment/admin', {collection : comments, as : 'comment'})
+    div.box-comments
+        != partial('../comment/admin', {collection : comments, as : 'comment'})
 
