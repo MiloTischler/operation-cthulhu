@@ -1,15 +1,14 @@
 h3= title
 div#message!= messages()
-form( method="post", action="/login")
-    table(width="100px")
-        tr
-            td
-                span UserName :
-                input(type="text", name="loginName", id="loginName")
-        tr
-            td
-                span Password :
-                input(type="password", name="password", id="password")
-        tr
-            td
-                input(type="submit", value="Send" , id="loginButton")
+form( method="post", action="/users/login")
+    div.login
+        div    
+            span UserName :
+        div 
+            input(type="text", name="loginName", id="loginName")
+        div
+            span Password :
+        div
+            input(type="password", name="password", id="password")   
+        div    
+            input(type="submit", value="Send" , id="loginButton")

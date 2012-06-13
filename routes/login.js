@@ -1,6 +1,6 @@
 module.exports = function(app, models) {
     // load login page
-    app.get('/login', function(req, res) {
+    app.get('/users/login', function(req, res) {
         res.render('user/login.jade', {
             locals: { user: req.user, title: 'Login' }
             
@@ -11,7 +11,7 @@ module.exports = function(app, models) {
 
 
     // login handler
-    app.post('/login', function(req, res) {
+    app.post('/users/login', function(req, res) {
         var loginName = req.param('loginName', null);
         var password = req.param('password', null);
 
@@ -53,7 +53,7 @@ module.exports = function(app, models) {
     });
 
     // log out
-    app.get('/logout', function(req, res) {
+    app.get('/users/logout', function(req, res) {
 
         // delete session data
         req.session.loggedIn = false;

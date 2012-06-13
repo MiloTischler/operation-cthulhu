@@ -1,0 +1,27 @@
+h3= title
+form( method="post", action="/users/register/admin")
+    != messages()
+
+    h4 Create User
+    table(width="100px")
+        tr
+            td
+                span UserName :
+                input(type="text", name="loginName", id="loginName")
+        tr
+            td
+                span Password :
+                input(type="password", name="password", id="password")
+        tr
+            td            
+                span Repeat Password :
+                input(type="password", name="passwordRepeat", id="passwordRepeat")
+        tr 
+            td
+                span User Role :
+                select(name="roles[role]")
+                    option(value="user", name="role") user
+                    option(value="admin", name="role") admin
+        tr
+            td
+                input(type="submit", value="Register" , id="registerButton")

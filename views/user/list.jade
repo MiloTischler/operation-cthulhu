@@ -6,7 +6,7 @@ div#message!= messages()
     - each user in users
       div.item
         div.title
-            a(href='/users/' + user._id)= user.name
+            a(href='/users/show/' + user._id)= user.name
         div.buttons
             a(href='/users/edit/' + user._id)
                 img(src="/img/edit.png")

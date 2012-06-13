@@ -13,23 +13,24 @@ html
                 h1 mein Blog
         div#menu
             ul
-                a(href="../") 
+                a(href="/") 
                     li home
                   - if (logincheck != true)
-                    a(href="../login")
+                    a(href="/users/login")
                         li login
                   - if (logincheck == true)
-                    a(href="../logout")
+                    a(href="/users/logout")
                         li logout
                   - if (isAdmin == 'admin')
-                    a(href="../admin")
+                    a(href="/users/admin")
                         li Admin
                   - if (logincheck != true)
-                    a(href="../register")
+                    a(href="/users/register")
                         li register
-                a(href="../users/list")
+                a(href="/users/list")
                     li users
-                a(href="../posts/create")
+                a(href="/posts/create")
+
                     li write post
               - if (logincheck == true)       
                 div#login-name
