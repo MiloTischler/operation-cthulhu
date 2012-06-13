@@ -3,7 +3,7 @@ module.exports = function(app, models) {
 
 
    // load userlist page
-    app.get('user/userList', function(req, res) {
+    app.get('/userList', function(req, res) {
         
         var User = models.users;
 
@@ -13,15 +13,12 @@ module.exports = function(app, models) {
             res.render('user/userList.jade', {
                 title: 'Userlist',
                 users: users
-                
-
             });
-            Console.log("tesstooo render userList");
         });
     });
 
     // handle userlist page
-    app.post('user/userList', function(req, res) {
+    app.post('/userList', function(req, res) {
 
         var User = models.user;
 

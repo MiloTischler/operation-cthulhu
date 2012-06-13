@@ -1,15 +1,15 @@
 module.exports = function(app, models) {
     // load login page
 
-    app.get('user/login', function(req, res) {
-        res.render('login.jade', {
+    app.get('/login', function(req, res) {
+        res.render('user/login.jade', {
 
             title: 'Login'
         });
     });
 
     // login handler
-    app.post('user/login', function(req, res) {
+    app.post('/login', function(req, res) {
         var loginName = req.param('loginName', null);
         var password = req.param('password', null);
 
