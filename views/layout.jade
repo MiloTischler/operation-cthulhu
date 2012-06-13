@@ -15,10 +15,12 @@ html
             ul
                 a(href="/") 
                     li home
-                a(href="/users/login")
-                    li login
-                a(href="/users/logout")
-                    li logout
+                - if (logincheck != true)
+                    a(href="/users/login")
+                        li login
+                - if (logincheck == true)
+                    a(href="/users/logout")
+                        li logout
                 a(href="/users/register")
                     li register
                 a(href="/users/admin")
@@ -26,7 +28,13 @@ html
                 a(href="/users/list")
                     li users
                 a(href="/posts/new")
+
                     li write post
+              - if (logincheck == true)       
+                div#login-name
+                    span logged in as: 
+                    span= currentUser
+
         div#content!= body
         div#footer
             div This website and its content is copyright of Alexander Ritz, Jakob Schweighofer, Laurenz Theuerkauf, Milo Tischler, Paul Neuhold - &copy 2012. All rights reserved.

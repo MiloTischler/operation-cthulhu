@@ -39,6 +39,19 @@ module.exports = function(app, express, mongoose) {
     messages: require('express-messages')
   });
 
+    app.dynamicHelpers ({
+        logincheck: function (req, res) {
+         return req.session.loggedIn;
+        }
+    });
+
+        app.dynamicHelpers ({
+        currentUser: function (req, res) {
+          if (req.session.loggedIn)
+            return req.session.currentUser.name;
+        }
+    });
+
   app.configure('production', function() {
     app.use(express.errorHandler());
   });
