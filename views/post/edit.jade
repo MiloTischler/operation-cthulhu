@@ -19,3 +19,5 @@ a(class='destroy', href='/posts/delete/'+post._id, title="delete") Delete
 &nbsp;
 a(href='/posts', title="cancel") Cancel
 
+!= partial('../comment/admin', {collection : comments, as : 'comment'})
+

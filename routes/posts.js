@@ -82,7 +82,8 @@
      app.get('/posts/edit/:postid', function(req, res) {
          res.render('post/edit.jade', {
              title: 'Update Post: ' + req.post.title,
-             post: req.post
+             post: req.post,
+             comments: req.comments
          });
      })
 
@@ -101,10 +102,10 @@
                      post: post
                  });
              } else {
-                console.log('Updated post: ' + post);
+                 console.log('Updated post: ' + post);
 
-                req.flash('notice', 'Edited successfully');
-                res.redirect('/posts/' + post._id);
+                 req.flash('notice', 'Edited successfully');
+                 res.redirect('/posts/' + post._id);
              }
          });
 

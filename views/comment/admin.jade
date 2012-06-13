@@ -1,0 +1,8 @@
+p 
+  != comment.title
+  br   
+  != comment.body
+  br
+
+  a(class='destroy', href='/comments/delete/'+comment._id, title="delete") Delete Comment
+hr
