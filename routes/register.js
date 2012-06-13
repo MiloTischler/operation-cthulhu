@@ -27,7 +27,7 @@ module.exports = function(app, models) {
         // save user in db
         registeredUser.save(function(err) {
             if (err) throw err;
-            
+
             console.log('New user saved.');
         });
     });
