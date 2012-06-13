@@ -1,12 +1,13 @@
-h2= title
+div#message!= messages()
 
-#userlist
-    -each user in users
-        div.item
-            div.user-name= user.name
-            div.buttons
-                div.buttonEdit
-                    a(href='/edit/' + user._id)!= "edit "
-                div.buttonRemove    
-                    a(href='/remove/' + user._id)!= "remove"
-
+#grid-view
+    h3= title
+    - each user in users
+      div.item
+        div.title
+            a(href='/users/' + user._id)= user.name
+        div.buttons
+            a(href='/users/edit/' + user._id)
+                img(src="/img/edit.png")
+            a(href='/users/delete/' + user._id)
+                img(src="/img/remove.png")

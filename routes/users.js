@@ -68,7 +68,7 @@ module.exports = function(app, models) {
     app.get('/users/delete/:userid', function(req, res) {
         var user = req.user;
         user.remove(function(err) {
-            res.redirect('/users/userList');
+            res.redirect('/userList');
         });
     });
 
