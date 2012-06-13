@@ -1,8 +1,13 @@
-p 
-  != comment.title
-  br   
-  != comment.body
-  br
+div.item
+  div.head
+    div.title
+      != comment.title
+    div.user
+    div.date
+      comment.date.toDateString()
 
-  a(class='destroy', href='/comments/delete/'+comment._id, title="delete") Delete Comment
-hr
+  div.body
+    != comment.body
+    div.buttons
+      a(class='destroy', href='/comments/delete/'+comment._id, title="delete")
+        img(src="/img/remove.png")
