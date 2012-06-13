@@ -1,5 +1,4 @@
  module.exports = function(app, models) {
-
      // Load all posts
      app.get('/posts', function(req, res) {
          var Post = models.posts;
