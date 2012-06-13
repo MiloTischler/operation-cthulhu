@@ -1,15 +1,23 @@
 module.exports = function(app, models) {
 
+
    // load userlist page
     app.get('/userList', function(req, res) {
         
-       // var User = models.users;
-        res.render('userList.jade', {
-            title: 'Userlist'
-            users: users
 
+        var User = models.users;
+
+        User.find({}).asc('name').run(function(err, users) {
+            if (err) throw err;
+
+            res.render('userList.jade', {
+                title: 'Hullahoop',
+                users: users
+
+            });
+            console.log('user:');
         });
-        console.log("hello my friend");
+         console.log('user:2');
     });
 
     // handle userlist page
@@ -17,16 +25,16 @@ module.exports = function(app, models) {
 
         var User = models.user;
    
-        User.find({}).desc('username').run(function(err, user) {
+        User.find({}).desc('loginName').run(function(err, user) {
             if (err) throw err;
 
             res.render('userlist.jade', {
                 title: 'Userlist',
-                user: user
+                users: users
             });
 
             console.log('Loaded Users:');
-            console.log(user);
+            console.log(users);
         });
     });
 

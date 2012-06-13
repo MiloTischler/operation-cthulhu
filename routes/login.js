@@ -11,6 +11,16 @@ module.exports = function(app, models) {
         var loginName = req.param('loginName', null);
         var password = req.param('password', null);
 
+        var User = models.users;
+
+        User.findOne({_id: loginName}).run(function(err, users) {
+            if (err) throw err;
+            console.log('found user:');
+        });
+
+            //check if login is correct
+       
+
         console.log("user: " + loginName + " pw: " + password);
     });
 }
