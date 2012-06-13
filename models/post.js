@@ -4,7 +4,6 @@ module.exports = function(mongoose) {
   var ObjectId = Schema.ObjectId;
 
   var schema = new Schema({
-    id: ObjectId,
     title : { type: String, default: 'Title' },
     body  : { type: String, default: 'Body' },
     date  : { type: Date, default: Date.now }

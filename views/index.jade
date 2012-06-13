@@ -6,10 +6,10 @@ h2
 h2
     a(href="/userList/") Userlist
 h3= title
-#articles
-    - each article in articles
-      div.article
-        div.created_at= article.created_at
+#posts
+    - each post in posts
+      div.post
+        div.created_at= post.date
         div.title 
-            a(href=article._id)!= article.title
-        div.body= article.body
+            a(href='/posts/' + post._id)!= post.title
+        div.body= post.body
