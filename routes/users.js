@@ -11,7 +11,8 @@ module.exports = function(app, models) {
             res.render('user/list.jade', {
 
                 title: 'Userlist',
-                users: users
+                users: users,
+                locals: { user: req.user}
             });
         });
     });
