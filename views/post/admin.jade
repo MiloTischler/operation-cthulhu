@@ -1,0 +1,15 @@
+h1= title
+h2
+    a(href="/new/") New
+h2
+    a(href="/login/") Login
+h2
+    a(href="/userList/") Userlist
+h3= title
+#posts
+    - each post in posts
+      div.post
+        div.created_at= post.date
+        div.title 
+            a(href='/posts/' + post._id)!= post.title
+        div.body= post.body

@@ -10,12 +10,13 @@ module.exports = function(app, models) {
         User.find({}).asc('name').run(function(err, users) {
             if (err) throw err;
 
-            res.render('userList.jade', {
-                title: 'schweigi',
+            res.render('user/userList.jade', {
+                title: 'Userlist',
                 users: users
+                
 
             });
-          
+            Console.log("tesstooo render userList");
         });
     });
 
@@ -28,7 +29,7 @@ module.exports = function(app, models) {
 
             if (err) throw err;
 
-            res.render('userlist.jade', {
+            res.render('user/userlist.jade', {
                 title: 'Userlist',
                 users: users
             });
@@ -48,8 +49,8 @@ module.exports = function(app, models) {
 
     // edit a user
     app.put('/user/:userid/edit', function(req, res) {
-        
-    });    
+        res.redirect('/userList');
+    });
 
     // Middleware for id param
     app.param('userid', function(req, res, next, id) {
