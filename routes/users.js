@@ -51,10 +51,10 @@ module.exports = function(app, models) {
         user.password = req.param('password', null);
         // change user in db
         user.save(function(err, user) {
-             if (err) throw err;
-             console.log('Updated User: ' + user);
-             res.redirect('/userList');
-         });
+            if (err) throw err;
+            console.log('Updated User: ' + user);
+            res.redirect('/userList');
+        });
     });
 
     // Middleware for id param
@@ -78,6 +78,13 @@ module.exports = function(app, models) {
         var user = req.user;
         user.remove(function(err) {
             res.redirect('/userList');
+        });
+    });
+
+
+    app.get('/user/admin', function(req, res) {
+        res.render('user/admin.jade', {
+            title: 'Admin Panel'
         });
     });
 
