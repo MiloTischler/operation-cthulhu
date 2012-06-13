@@ -2,10 +2,13 @@ module.exports = function(app, models) {
     // load login page
     app.get('/login', function(req, res) {
         res.render('user/login.jade', {
-
-            title: 'Login'
+            locals: { user: req.user, title: 'Login' }
+            
         });
     });
+    
+
+
 
     // login handler
     app.post('/login', function(req, res) {
