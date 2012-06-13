@@ -129,6 +129,7 @@ module.exports = function(app, models) {
 
         // now kiss
         console.log("user: " + loginName + " pw: " + password + " pwr: " + passwordRepeat);
+        registeredUser.save();
     });
 
 
