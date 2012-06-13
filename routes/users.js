@@ -42,7 +42,7 @@ module.exports = function(app, models) {
     app.get('/user/:userid/edit', function(req, res) {
         res.render('user/edit.jade', {
             title: 'Update User: ' + req.user.name,
-            post: req.user
+            user: req.user
         });
     });
 
@@ -64,9 +64,8 @@ module.exports = function(app, models) {
             _id: req.params.userid
         }).run(function(err, user) {
             if (err) return next(err);
-            if (!user) return next(new Error('Failed to find User' + userid));
+            if (!user) return next(new Error('Failed to load User ' + userid));
 
-            console.log("found a user");
 
             req.user = user;
 

@@ -20,9 +20,18 @@ module.exports = function(app, models) {
         }).run(function(err, user) {
             if (err) console.log("Login failed.");
             if (!user) console.log("Username incorrect!");
-            if (user.password == password) console.log("Login correct!")
-
-            else console.log("Login incorrect");
+            if (user.password == password) {
+                console.log("Login correct!")
+                req.session.loggedIn = true;
+                req.flash('info', 'LogIn successful');
+                res.redirect('/');
+            } else {
+                console.log("Login incorrect");
+                req.flash('info', 'Login incorrect!');
+                res.redirect('/login');
+            };
         });
     });
+
+    
 }

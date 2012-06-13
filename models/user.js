@@ -4,8 +4,7 @@ module.exports = function(mongoose) {
   var ObjectId = Schema.ObjectId;
 
   var schema = new Schema({
-    id: ObjectId,
-    name : { type: String, required: 'true', unique: 'true' },
+    name : { type: String, required: 'true' },
     password : { type: String, required: 'true' }
   });
 

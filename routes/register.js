@@ -36,5 +36,8 @@ module.exports = function(app, models) {
             console.log('New user saved.');
             res.redirect('/posts');
         });
+
+        req.flash('info', 'Registration successful!');
+        res.redirect('/register');
     });
 }

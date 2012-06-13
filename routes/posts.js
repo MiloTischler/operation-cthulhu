@@ -62,7 +62,8 @@
      app.get('/posts/:postid', function(req, res) {
          res.render('post/view.jade', {
              title: 'Blog entry',
-             post: req.post
+             post: req.post,
+             comments: req.comments
          });
      });
 
@@ -94,7 +95,7 @@
      app.get('/posts/delete/:postid', function(req, res) {
          var post = req.post;
          post.remove(function(err) {
-             res.redirect('/posts');
+             res.redirect('/posts/admin');
          });
      });
 
@@ -104,13 +105,22 @@
 
          Post.findOne({
              _id: req.params.postid
-         }).run(function(err, post) {
+         })
+         .populate('user')
+         .run(function(err, post) {
              if (err) return next(err);
              if (!post) return next(new Error('Failed to load post ' + postid));
 
              req.post = post;
 
-             next();
+             var Comment = models.comments;
+
+             Comment.find({post : req.post})
+             .run(function(err, comments) {
+                if(err) throw err;
+                req.comments = comments;
+                next();
+             });
          });
      });
  }
