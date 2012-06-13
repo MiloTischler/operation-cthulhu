@@ -188,3 +188,50 @@ h3 {
   padding: 20px;
   background-color: #eee;
 }
+.box-comments .item {
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin: 10px 0;
+  width: 760px;
+  padding: 20px;
+  background-color: #eee;
+}
+.box-comments .item .head-comment {
+  overflow: hidden;
+  border-bottom: 1px solid #bbb;
+}
+.box-comments .item .head-comment .title {
+  float: left;
+}
+.box-comments .item .head-comment .user {
+  float: left;
+}
+.box-comments .item .head-comment .date {
+  float: right;
+}
+.box-comments .item .body-comment {
+  overflow: hidden;
+  width: 760px;
+}
+.box-comments .item .body-comment .text {
+  width: 700px;
+}
+.box-comments .item .body-comment .buttons {
+  width: 50px;
+  float: right;
+}
+#message {
+  background-color: #648f88;
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  color: #efefef;
+}
+#messages {
+  padding: 5px;
+}
+#messages ul li {
+  color: #efefef;
+}
