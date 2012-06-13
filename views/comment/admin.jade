@@ -1,10 +1,14 @@
 div.item
   div.head-comment
     div.title
-      != comment.title
+      span titel:
+      span!= comment.title
     div.user
+      span name: 
+      span!= comment.user.name
     div.date
-      != comment.date.toDateString()
+      span date: 
+      span!= comment.date.toDateString()
 
   div.body-comment
     div.text
