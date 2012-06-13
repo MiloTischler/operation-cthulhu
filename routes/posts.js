@@ -49,7 +49,7 @@
     // Update a post
     app.get('/posts/:postid/edit', function(req, res) {
         var Post = models.posts;
-
+        
         res.render('blog_update.jade', {title: 'Update Post: ' + post.title, post : req.post});
     })
 
