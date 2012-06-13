@@ -2,4 +2,11 @@ h2= title
 
 #userlist
     -each user in users
-        div.user user.name
+        div.item
+            div.user-name= user.name
+            div.buttons
+                div.buttonEdit
+                    a(href='/edit/' + user._id)!= "edit "
+                div.buttonRemove    
+                    a(href='/remove/' + user._id)!= "remove"
+
