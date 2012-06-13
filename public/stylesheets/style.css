@@ -9,6 +9,13 @@ body {
   height: 100px;
   width: 960px;
 }
+#logo {
+  float: left;
+}
+#blog-title h1 {
+  padding: 20px;
+  color: #648f88;
+}
 #menu {
   width: 959px;
   height: 30px;
@@ -51,17 +58,25 @@ body {
 }
 #content {
   width: 960px;
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 #footer {
+  border-top: 2px solid #444;
   width: 960px;
-  height: 50px;
+  height: 40px;
+}
+#footer div {
+  text-align: center;
+  margin: 10px;
 }
 h1,
 h2 {
   margin: 0;
   font-size: 22px;
-  color: #343434;
+  color: #648f88;
 }
 h3 {
   font-size: 25px;

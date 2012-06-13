@@ -1,11 +1,6 @@
 module.exports = function(app, models) {
 
-    // Redirect to posts
-    app.get('/', function(req, res) {
-        res.redirect('/posts');
-    });
-
-    // load userlist page
+   // load userlist page
     app.get('/userList', function(req, res) {
         
        // var User = models.users;
@@ -32,4 +27,5 @@ module.exports = function(app, models) {
             console.log(user);
         });
     });
+
 }
