@@ -3,9 +3,9 @@ form( method="post")
     div
         div
             span Title :
-            input(type="text", name="title", id="editArticleTitle")
+            input(type="text", name="title", id="editArticleTitle", value=post.title)
         div
             span Body :
-            textarea(name="body", rows=20, id="editArticleBody")
+            textarea(name="body", rows=20, id="editArticleBody")= post.body
         div#editArticleSubmit
             input(type="submit", value="Send")
