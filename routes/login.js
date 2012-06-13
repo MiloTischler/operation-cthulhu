@@ -23,8 +23,11 @@ module.exports = function(app, models) {
         }).run(function(err, user) {
 
             if (err) console.log("Login failed.");
-            if (!user) console.log("Username incorrect!");
-            if (user.password == password) {
+            if (!user) {
+                console.log("Username incorrect!")
+                req.flash('info', 'Login incorrect!');
+                res.redirect('/login');
+            } else if (user.password == password) {
                 console.log("Login correct!")
                 req.session.loggedIn = true;
                 req.session.currentUser = user;
