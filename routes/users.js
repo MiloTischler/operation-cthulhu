@@ -48,7 +48,7 @@ module.exports = function(app, models) {
             _id: req.params.userid
         }).run(function(err, user) {
             if (err) return next(err);
-            if (!user) return next(new Error('Failed to load post ' + userid));
+            if (!user) return next(new Error('Failed to load User ' + userid));
 
             req.user = user;
 
