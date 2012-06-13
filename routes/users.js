@@ -1,8 +1,7 @@
 module.exports = function(app, models) {
 
-   // load userlist page
-    app.get('/userList', function(req, res) {
-        
+    // load userlist page
+    app.get('/userList', utils.requiresLogin, function(req, res) {
 
         var User = models.users;
 
@@ -18,7 +17,7 @@ module.exports = function(app, models) {
     });
 
     // handle userlist page
-    app.post('/userList', function(req, res) {
+    app.post('/userList', utils.requiresLogin, function(req, res) {
 
         var User = models.user;
 
@@ -37,7 +36,7 @@ module.exports = function(app, models) {
     });
 
     // edit a user
-    app.get('/user/edit/:userid', function(req, res) {
+    app.get('/user/edit/:userid', utils.requiresLogin, function(req, res) {
         res.render('user/edit.jade', {
             title: 'Update User: ' + req.user.name,
             user: req.user
@@ -45,7 +44,7 @@ module.exports = function(app, models) {
     });
 
     // edit a user
-    app.put('/user/edit/:userid', function(req, res) {
+    app.put('/user/edit/:userid', utils.requiresLogin, function(req, res) {
         var user = req.user
 
         user.name = req.param('UserName', null);
