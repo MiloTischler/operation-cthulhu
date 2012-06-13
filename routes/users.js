@@ -4,14 +4,13 @@ module.exports = function(app, models) {
     app.get('/users/list', utils.requiresUser, function(req, res) {
 
         var User = models.users;
-
+        var isAdmin = 'admin';
+        
 
         User.find({}).asc('name').run(function(err, users) {
             if (err) throw err;
 
-            var isAdmin = user.role;
-
-            if (user.role == isAdmin)
+            if (req.session.currentUser.role != isAdmin)
             {
                 res.render('user/list.jade', {
 
