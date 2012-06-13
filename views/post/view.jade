@@ -4,7 +4,8 @@ div#single-box
     div.post
         div.head
             div.date= post.date.toDateString()
-        div.body= post.body
+        div.body!= md(post.body);
+
 
     div.box
         h4 Comments:
