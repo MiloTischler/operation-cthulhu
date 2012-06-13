@@ -70,23 +70,23 @@ h1 {
   text-shadow: 1px 2px 2px #ddd;
   font-size: 60px;
 }
-#articles {
+#posts {
   text-align: left;
   margin-left: auto;
   margin-right: auto;
   width: 320px;
 }
-#articles .article {
+#posts .post {
   margin: 20px;
 }
-#articles .article .created_at {
-  display: none;
+#posts .post .created_at {
+  display: block;
 }
-#articles .article .title {
+#posts .post .title {
   font-weight: bold;
   text-decoration: underline;
   background-color: #eee;
 }
-#articles .article .body {
+#posts .post .body {
   background-color: #ffa;
 }
