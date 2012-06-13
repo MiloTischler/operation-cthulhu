@@ -3,6 +3,7 @@ div#message!= messages()
 div#single-box
     div.post
         div.head
+            div.title= post.user.name
             div.date= post.date.toDateString()
         div.body!= md(post.body);
 

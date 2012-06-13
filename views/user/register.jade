@@ -1,20 +1,18 @@
 h3= title
 
 form( method="post", action="/users/register")
-    != messages()
-    table(width="100px")
-        tr
-            td
-                span UserName :
-                input(type="text", name="loginName", id="loginName")
-        tr
-            td
-                span Password :
-                input(type="password", name="password", id="password")
-        tr
-            td            
-                span Repeat Password :
-                input(type="password", name="passwordRepeat", id="passwordRepeat")
-        tr
-            td
-                input(type="submit", value="Register" , id="registerButton")
+    div#message!= messages()
+    div
+        span UserName :
+    div
+        input(type="text", name="loginName", id="loginName")
+    div
+        span Password :
+    div   
+        input(type="password", name="password", id="password")
+    div         
+        span Repeat Password :
+    div    
+        input(type="password", name="passwordRepeat", id="passwordRepeat")
+    div
+        input(type="submit", value="Register" , id="registerButton")
