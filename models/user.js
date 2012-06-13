@@ -1,12 +1,12 @@
 module.exports = function(mongoose) {
-  var collection = 'posts';
+  var collection = 'users';
   var Schema = mongoose.Schema;
   var ObjectId = Schema.ObjectId;
 
   var schema = new Schema({
-    title : { type: String, default: 'Title' },
-    body  : { type: String, default: 'Body' },
-    date  : { type: Date, default: Date.now }
+    id: ObjectId,
+    name : { type: String, required: 'true' },
+    password : { type: String, required: 'true' }
   });
 
   this.model = mongoose.model(collection, schema);
