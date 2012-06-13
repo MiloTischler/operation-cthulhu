@@ -17,7 +17,7 @@
      });
 
      // Write a new post
-     app.get('/posts/new', function(req, res) {
+     app.get('/posts/create', utils.requiresAdmin, function(req, res) {
          var Post = models.posts;
 
          res.render('post/create.jade', {
@@ -26,13 +26,14 @@
          });
      });
 
-     app.post('/posts/new', function(req, res) {
+     app.post('/posts/create', utils.requiresAdmin, function(req, res) {
          var Post = models.posts;
 
          var post = new Post();
 
          post.title = req.param('title');
          post.body = req.param('body');
+         post.user = req.session.user;
 
          post.save(function(err) {
              if (err) {
@@ -53,7 +54,7 @@
 
 
      // Admin posts
-     app.get('/posts/admin', function(req, res) {
+     app.get('/posts/admin', utils.requiresAdmin, function(req, res) {
          var Post = models.posts;
 
          Post.find({}).desc('date').run(function(err, posts) {
@@ -79,7 +80,7 @@
      });
 
      // Update a post
-     app.get('/posts/edit/:postid', function(req, res) {
+     app.get('/posts/edit/:postid', utils.requiresAdmin, function(req, res) {
          res.render('post/edit.jade', {
              title: 'Update Post: ' + req.post.title,
              post: req.post,
@@ -87,11 +88,12 @@
          });
      })
 
-     app.put('/posts/edit/:postid', function(req, res) {
+     app.put('/posts/edit/:postid', utils.requiresAdmin, function(req, res) {
          var post = req.post;
 
          post.title = req.param('title');
          post.body = req.param('body');
+         post.user = req.session.user;
 
          post.save(function(err) {
              if (err) {
@@ -112,7 +114,7 @@
      });
 
      // Delete a post
-     app.get('/posts/delete/:postid', function(req, res) {
+     app.get('/posts/delete/:postid', utils.requiresAdmin, function(req, res) {
          var post = req.post;
          post.remove(function(err) {
              req.flash('notice', 'Deleted successfully');
