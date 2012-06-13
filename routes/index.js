@@ -46,12 +46,15 @@ module.exports = function(app, models) {
 
     // registration handler
     app.post('/register', function(req, res) {
+
         var loginName = req.param('loginName', null);
         var password = req.param('password', null);
         var passwordRepeat = req.param('passwordRepeat', null);
 
         if (password != passwordRepeat) {
+            console.log("Flash should appear!");
             req.flash('info', 'Passwords must be the same!');
+            res.redirect('/register');
         }
 
         var User = models.users;
@@ -60,7 +63,6 @@ module.exports = function(app, models) {
         registeredUser.password = password;
 
         // now kiss
-
         console.log("user: " + loginName + " pw: " + password + " pwr: " + passwordRepeat);
     });
 
