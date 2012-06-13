@@ -1,6 +1,5 @@
 module.exports = function(app, express, mongoose) {
   var config = this;
-  var url = require("url");
 
   app.configure(function() {
     app.set('views', __dirname + '/views');
@@ -45,13 +44,4 @@ module.exports = function(app, express, mongoose) {
   });
 
   app.mongoose.connect('mongodb://localhost:27017/blog');
-
-  function requiresLogin = function(res, req, next) {
-    if (req.session.loggedIn == true && req.session.user != null) next();
-    else {
-      req.flash('info', 'You need to be logged in.');
-      req.session.redirectAfterLogin = url.parse(request.url).pathname;
-      res.redirect('/login');
-    }
-  }
 }

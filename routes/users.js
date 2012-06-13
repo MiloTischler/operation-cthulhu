@@ -1,9 +1,7 @@
 module.exports = function(app, models) {
 
-
-
     // load userlist page
-    app.get('/userList', requiresLogin, function(req, res) {
+    app.get('/userList', utils.requiresLogin, function(req, res) {
 
         var User = models.users;
 
@@ -18,7 +16,7 @@ module.exports = function(app, models) {
     });
 
     // handle userlist page
-    app.post('/userList', requiresLogin, function(req, res) {
+    app.post('/userList', utils.requiresLogin, function(req, res) {
 
         var User = models.user;
 

@@ -51,7 +51,6 @@ module.exports = function(app, models) {
         // delete session data
         req.session.loggedIn = false;
         req.session.user = null;
-        req.session.destroy();
 
         // redirect to home
         req.flash('info', 'LogOut successful!');
