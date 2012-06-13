@@ -5,15 +5,30 @@ module.exports = function(app, models) {
 
         var User = models.users;
 
+
         User.find({}).asc('name').run(function(err, users) {
             if (err) throw err;
 
-            res.render('user/list.jade', {
+            var isAdmin = user.role;
 
-                title: 'Userlist',
-                users: users,
-                locals: { user: req.user}
-            });
+            if (user.role == isAdmin)
+            {
+                res.render('user/list.jade', {
+
+                    title: 'Userlist',
+                    users: users,
+                    locals: { user: req.user}
+                });
+            } 
+            else
+            {
+                res.render('user/adminlist.jade', {
+
+                    title: 'Userlist',
+                    users: users,
+                    locals: { user: req.user}
+                });  
+            }
         });
     });
 
