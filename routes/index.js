@@ -50,6 +50,17 @@ module.exports = function(app, models) {
         var password = req.param('password', null);
         var passwordRepeat = req.param('passwordRepeat', null);
 
+        if (password != passwordRepeat) {
+            req.flash('info', 'Passwords must be the same!');
+        }
+
+        var User = models.users;
+        var registeredUser = new User();
+        registeredUser.name = loginName;
+        registeredUser.password = password;
+
+        // now kiss
+
         console.log("user: " + loginName + " pw: " + password + " pwr: " + passwordRepeat);
     });
 

@@ -9,6 +9,9 @@ module.exports = function(app, express, mongoose) {
       app.use(require('stylus').middleware({ src: __dirname + '/public' }));
       app.use(app.router);
       app.use(express.static(__dirname + '/public'));
+      app.use(express.cookieParser());
+      app.use(express.session({ secret: "keyboard cat" }));
+      app.dynamicHelpers({ messages: require('express-messages') });
     });
 
     app.configure('development', function(){
