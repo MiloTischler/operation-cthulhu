@@ -5,7 +5,7 @@ div#message!= messages()
     - each post in posts
       div.item
         div.title
-            a(href='/posts/' + post._id)= post.title
+            a(href='/posts/show/' + post._id)= post.title
         div.buttons
             a(href='/posts/edit/' + post._id)
                 img(src="/img/edit.png")
