@@ -1,16 +1,16 @@
 module.exports = function(app, models) {
 
-
-
    // load userlist page
     app.get('/userList', function(req, res) {
         
+
         var User = models.users;
 
         User.find({}).asc('name').run(function(err, users) {
             if (err) throw err;
 
             res.render('user/userList.jade', {
+
                 title: 'Userlist',
                 users: users
             });
@@ -37,16 +37,25 @@ module.exports = function(app, models) {
     });
 
     // edit a user
-    app.get('/user/:userid/edit', function(req, res) {
+    app.get('/user/edit/:userid', function(req, res) {
         res.render('user/edit.jade', {
             title: 'Update User: ' + req.user.name,
-            post: req.user
+            user: req.user
         });
     });
 
     // edit a user
-    app.put('/user/:userid/edit', function(req, res) {
-        res.redirect('/userList');
+    app.put('/user/edit/:userid', function(req, res) {
+        var user = req.user
+
+        user.name = req.param('UserName', null);
+        user.password = req.param('password', null);
+        // change user in db
+        user.save(function(err, user) {
+             if (err) throw err;
+             console.log('Updated User: ' + user);
+             res.redirect('/userList');
+         });
     });
 
     // Middleware for id param
@@ -57,6 +66,7 @@ module.exports = function(app, models) {
         }).run(function(err, user) {
             if (err) return next(err);
             if (!user) return next(new Error('Failed to load User ' + userid));
+
 
             req.user = user;
 
