@@ -53,8 +53,8 @@ module.exports = function(app, express, mongoose) {
 
   app.dynamicHelpers({
     isAdmin: function(req) {
-      if (req.session.loggedIn ) return req.session.currentUser.role;
-      else if(!req.session.noAdmin) return 'admin';
+      if (req.session.loggedIn) return req.session.currentUser.role;
+      else if (req.session.noAdmin) return 'admin';
     }
   });
 

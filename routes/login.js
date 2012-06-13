@@ -10,8 +10,6 @@ module.exports = function(app, models) {
         });
     });
 
-
-
     // login handler
     app.post('/users/login', function(req, res) {
         var loginName = req.param('loginName', null);
