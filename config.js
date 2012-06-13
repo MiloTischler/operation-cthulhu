@@ -39,18 +39,29 @@ module.exports = function(app, express, mongoose) {
     messages: require('express-messages')
   });
 
-    app.dynamicHelpers ({
-        logincheck: function (req, res) {
-         return req.session.loggedIn;
-        }
-    });
+  app.dynamicHelpers({
+    logincheck: function(req, res) {
+      return req.session.loggedIn;
+    }
+  });
 
-        app.dynamicHelpers ({
-        currentUser: function (req, res) {
-          if (req.session.loggedIn)
-            return req.session.currentUser.name;
-        }
-    });
+  app.dynamicHelpers({
+    currentUser: function(req, res) {
+      if (req.session.loggedIn) return req.session.currentUser.name;
+    }
+  });
+
+  app.dynamicHelpers({
+    isAdmin: function(req) {
+      if (req.session.loggedIn) return req.session.currentUser.role;
+    }
+  });
+
+  app.dynamicHelpers({
+    noAdmin: function(req) {
+      return req.session.noAdmin;
+    }
+  });
 
   app.configure('production', function() {
     app.use(express.errorHandler());
