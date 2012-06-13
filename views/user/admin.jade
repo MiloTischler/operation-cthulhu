@@ -2,6 +2,7 @@ h3= title
 form( method="post", action="/users/register/admin")
     != messages()
 
+    hr
     h4 Create User
     table(width="100px")
         tr
@@ -25,3 +26,10 @@ form( method="post", action="/users/register/admin")
         tr
             td
                 input(type="submit", value="Register" , id="registerButton")
+    
+
+    hr
+    
+    h4 Manage Posts
+        div
+            a(href="/posts/admin") Posts Admin Panel
