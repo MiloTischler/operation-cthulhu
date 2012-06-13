@@ -13,20 +13,22 @@ html
                 h1 mein Blog
         div#menu
             ul
-                a(href="/") 
+                a(href="../") 
                     li home
                   - if (logincheck != true)
-                    a(href="login")
+                    a(href="../login")
                         li login
                   - if (logincheck == true)
-                    a(href="logout")
+                    a(href="../logout")
                         li logout
-                a(href="register")
+                a(href="../register")
                     li register
-                a(href="users/list")
+                a(href="../users/list")
                     li users
-                a(href="posts/new")
+                a(href="../posts/create")
                     li write post
+              - if (logincheck == true)       
+                div= currentUser
 
         div#content!= body
         div#footer
