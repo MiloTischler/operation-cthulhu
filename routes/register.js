@@ -1,19 +1,18 @@
 module.exports = function(app, models) {
     // load registration page
-    app.get('/register', function(req, res) {
+    app.get('/users/register', function(req, res) {
         res.render('user/register.jade', {
             title: 'Registration'
         });
     });
 
     // registration handler
-    app.post('register', function(req, res) {
+    app.post('/users/register', function(req, res) {
 
         var loginName = req.param('loginName', null);
         var password = req.param('password', null);
         var passwordRepeat = req.param('passwordRepeat', null);
-        var roles = req.param('roles', null);
-        var role = roles.role;
+        var role = "user";
 
         if (password != passwordRepeat) {
             console.log("Flash should appear!");
@@ -42,9 +41,8 @@ module.exports = function(app, models) {
         });
     });
 
-
-// registration handler
-    app.post('registerAdmin', function(req, res) {
+    // registration handler
+    app.post('/users/register/admin', utils.requiresAdmin, function(req, res) {
 
         var loginName = req.param('loginName', null);
         var password = req.param('password', null);

@@ -15,15 +15,17 @@ html
             ul
                 a(href="/") 
                     li home
-                a(href="login")
+                a(href="/users/login")
                     li login
-                a(href="logout")
+                a(href="/users/logout")
                     li logout
-                a(href="user/register")
+                a(href="/users/register")
                     li register
-                a(href="userList")
+                a(href="/users/admin")
+                    li Admin
+                a(href="/users/list")
                     li users
-                a(href="newpost")
+                a(href="/posts/new")
                     li write post
         div#content!= body
         div#footer

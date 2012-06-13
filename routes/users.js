@@ -1,14 +1,14 @@
 module.exports = function(app, models) {
 
-    // load userlist page
-    app.get('/userList', utils.requiresUser, function(req, res) {
+    // Display user list
+    app.get('/users/list', utils.requiresUser, function(req, res) {
 
         var User = models.users;
 
         User.find({}).asc('name').run(function(err, users) {
             if (err) throw err;
 
-            res.render('user/userList.jade', {
+            res.render('user/list.jade', {
 
                 title: 'Userlist',
                 users: users
@@ -16,44 +16,44 @@ module.exports = function(app, models) {
         });
     });
 
-    // handle userlist page
-    app.post('/userList', utils.requiresUser, function(req, res) {
-
-        var User = models.user;
-
-        User.find({}).desc('loginName').run(function(err, user) {
-
-            if (err) throw err;
-
-            res.render('user/userlist.jade', {
-                title: 'Userlist',
-                users: users
-            });
-
-            console.log('Loaded Users:');
-            console.log(users);
-        });
-    });
-
-    // edit a user
-    app.get('/user/edit/:userid', utils.requiresUser, function(req, res) {
+    // Update a user
+    app.get('/users/edit/:userid', utils.requiresUser, function(req, res) {
         res.render('user/edit.jade', {
             title: 'Update User: ' + req.user.name,
             user: req.user
         });
     });
 
-    // edit a user
-    app.put('/user/edit/:userid', utils.requiresUser, function(req, res) {
+    app.put('/users/edit/:userid', utils.requiresUser, function(req, res) {
         var user = req.user
 
-        user.name = req.param('UserName', null);
+        user.name = req.param('UserName');
         user.password = req.param('password', null);
         // change user in db
         user.save(function(err, user) {
-            if (err) throw err;
-            console.log('Updated User: ' + user);
-            res.redirect('/userList');
+            if (err) {
+                utils.mongooseErrorHandler(err, req);
+
+                res.render('user/edit.jade', {
+                    title: 'Update User: ' + user.name,
+                    user: user
+                });
+            } else {
+                console.log('Updated User: ' + user);
+
+                req.flash('notice', 'Edited successfully');
+                res.redirect('/users/list');
+            }
+        });
+    });
+
+
+    // Delete a user
+    app.get('/users/delete/:userid', utils.requiresUser, function(req, res) {
+        var user = req.user;
+        user.remove(function(err) {
+            req.flash('notice', 'Deleted successfully');
+            res.redirect('/user/list');
         });
     });
 
@@ -81,11 +81,8 @@ module.exports = function(app, models) {
         });
     });
 
-
-    app.get('/user/admin', function(req, res) {
-        res.render('user/admin.jade', {
-            title: 'Admin Panel'
-        });
+    app.get('/users/admin123', utils.requireAdmin, function(req, res) {
+        res.send("ups");
     });
 
 }

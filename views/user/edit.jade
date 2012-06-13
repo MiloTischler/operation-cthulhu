@@ -1,11 +1,11 @@
 h3= title
-form( method="post", action="/user/edit/" + user.id)
+form( method="post", action="/users/edit/" + user._id)
     input(name='_method', value='PUT', type='hidden')
     table(width="100px")
         tr
             td
                 span UserName :
-                input(type="text", name="UserName", id="UserName")
+                input(type="text", name="UserName", id="UserName", value=user.name)
         tr
             td
                 span Password :

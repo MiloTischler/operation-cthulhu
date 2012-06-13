@@ -8,7 +8,7 @@ div#message!= messages()
         div.title
             a(href='/user/' + user._id)= user.name
         div.buttons
-            a(href='/user/edit/' + user._id)
+            a(href='/users/edit/' + user._id)
                 img(src="/img/edit.png")
             a(href='/users/delete/' + user._id)
                 img(src="/img/remove.png")
