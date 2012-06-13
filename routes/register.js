@@ -18,31 +18,35 @@ module.exports = function(app, models) {
             console.log("Flash should appear!");
             req.flash('info', 'Passwords must be the same!');
             res.redirect('/users/register');
-        }
 
-        var User = models.users;
-        var registeredUser = new User();
-        registeredUser.name = loginName;
-        registeredUser.password = password;
-        registeredUser.role = role;
+        } else {
 
-        // save user in db
-        registeredUser.save(function(err, user) {
-            console.log(err);
-            if (err) {
-                if (err.code == 11000) {
-                    req.flash('info', 'Username already taken!');
+            var User = models.users;
+            var registeredUser = new User();
+            registeredUser.name = loginName;
+            registeredUser.password = password;
+            registeredUser.role = role;
+
+
+            // save user in db
+            registeredUser.save(function(err, user) {
+                console.log(err);
+                if (err) {
+                    if (err.code == 11000) {
+                        req.flash('info', 'Username already taken!');
+                        res.redirect('/users/register');
+                    }
+                } else {
+                    req.flash('info', 'Registration successful!');
                     res.redirect('/users/register');
                 }
-            } else {
-                req.flash('info', 'Registration successful!');
-                res.redirect('/users/register');
-            }
-        });
+            });
+        }
     });
 
     // registration handler
-    app.post('/users/register/admin', utils.requiresAdmin, function(req, res) {
+    app.post('/users/register/admin', utils.requiresAdmin(models), function(req, res) {
+        console.log("trying my best");
 
         var loginName = req.param('loginName', null);
         var password = req.param('password', null);
@@ -54,26 +58,29 @@ module.exports = function(app, models) {
             console.log("Flash should appear!");
             req.flash('info', 'Passwords must be the same!');
             res.redirect('/users/register');
-        }
 
-        var User = models.users;
-        var registeredUser = new User();
-        registeredUser.name = loginName;
-        registeredUser.password = password;
-        registeredUser.role = role;
+        } else {
+            console.log("step 1");
+            var User = models.users;
+            var registeredUser = new User();
+            registeredUser.name = loginName;
+            registeredUser.password = password;
+            registeredUser.role = role;
 
-        // save user in db
-        registeredUser.save(function(err, user) {
-            console.log(err);
-            if (err) {
-                if (err.code == 11000) {
-                    req.flash('info', 'Username already taken!');
+            // save user in db
+            registeredUser.save(function(err, user) {
+                console.log(err);
+                if (err) {
+                    if (err.code == 11000) {
+                        req.flash('info', 'Username already taken!');
+                        res.redirect('/users/register');
+                    }
+                } else {
+                    req.flash('info', 'Registration successful!');
                     res.redirect('/users/register');
                 }
-            } else {
-                req.flash('info', 'Registration successful!');
-                res.redirect('/users/register');
-            }
-        });
+            });
+        }
+
     });
 }
