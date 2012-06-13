@@ -53,4 +53,16 @@ module.exports = function(app, models) {
         console.log("user: " + loginName + " pw: " + password + " pwr: " + passwordRepeat);
     });
 
+    // load userlist page
+    app.get('/userList', function(req, res) {
+        res.render('userList.jade', {
+            title: 'Userlist',
+            user1: 'Milo',
+            user2: 'Paul',
+            user3: 'Jakob'
+        });
+    });
+
+
+
 }
