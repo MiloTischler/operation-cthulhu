@@ -40,8 +40,8 @@ module.exports = function(app, express, mongoose) {
   });
 
     app.dynamicHelpers ({
-        isloggedin: function (req, res) {
-         return req.isloggedin;
+        logincheck: function (req, res) {
+         return req.session.loggedIn;
         }
     });
 

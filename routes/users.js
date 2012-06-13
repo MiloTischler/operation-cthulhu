@@ -1,7 +1,7 @@
 module.exports = function(app, models) {
 
     // load userlist page
-    app.get('/userList', utils.requiresLogin, function(req, res) {
+    app.get('/userList', utils.requiresUser, function(req, res) {
 
         var User = models.users;
 
@@ -11,13 +11,14 @@ module.exports = function(app, models) {
             res.render('user/userList.jade', {
 
                 title: 'Userlist',
-                users: users
+                users: users,
+                locals: { user: req.user}
             });
         });
     });
 
     // handle userlist page
-    app.post('/userList', utils.requiresLogin, function(req, res) {
+    app.post('/userList', utils.requiresUser, function(req, res) {
 
         var User = models.user;
 
@@ -31,7 +32,7 @@ module.exports = function(app, models) {
     });
 
     // edit a user
-    app.get('/user/edit/:userid', utils.requiresLogin, function(req, res) {
+    app.get('/user/edit/:userid', utils.requiresUser, function(req, res) {
         res.render('user/edit.jade', {
             title: 'Update User: ' + req.user.name,
             user: req.user
@@ -39,7 +40,7 @@ module.exports = function(app, models) {
     });
 
     // edit a user
-    app.put('/user/edit/:userid', utils.requiresLogin, function(req, res) {
+    app.put('/user/edit/:userid', utils.requiresUser, function(req, res) {
         var user = req.user
 
         user.name = req.param('UserName', null);
@@ -69,7 +70,7 @@ module.exports = function(app, models) {
     });
 
     // Delete a user
-    app.get('/users/delete/:userid', function(req, res) {
+    app.get('/users/delete/:userid', utils.requiresUser, function(req, res) {
         var user = req.user;
         user.remove(function(err) {
             res.redirect('/userList');

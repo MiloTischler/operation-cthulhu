@@ -8,4 +8,4 @@ div#message!= messages()
             div.item-head
                 div.title= post.title
                 div.date= post.date.toDateString()
-            div.body!= post.body
+            div.body!= md(post.body)

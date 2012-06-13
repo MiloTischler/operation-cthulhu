@@ -6,7 +6,7 @@ module.exports = function(mongoose) {
   var schema = new Schema({
     title : { type: String, default: 'Title', required: 'true' },
     body  : { type: String, default: 'Body' },
-    user  : { type : Schema.ObjectId, ref : 'users' },
+    user  : { type : Schema.ObjectId, ref : 'users'},
     date  : { type: Date, default: Date.now }
   });
 

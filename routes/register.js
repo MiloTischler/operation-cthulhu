@@ -31,13 +31,11 @@ module.exports = function(app, models) {
                     req.flash('info', 'Username already taken!');
                     res.redirect('/register');
                 }
+            } else {
+
+                req.flash('info', 'Registration successful!');
+                res.redirect('/register');
             }
-
-            console.log('New user saved.');
-            req.flash('info', 'Registration successful!');
-            res.redirect('/register');
         });
-
-        
     });
 }

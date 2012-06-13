@@ -1,21 +1,25 @@
-h1= title
-form( method="post")
-    input(name='_method', value='PUT', type='hidden')
-    div
+h3= title
+div#message!= messages()
+div#single-box
+    form( method="post")
+        input(name='_method', value='PUT', type='hidden')
         div
-            span Title :
-            input(type="text", name="title", id="editArticleTitle", value=post.title)
-        div
-            span Body :
-            textarea(name="body", rows=20, id="editArticleBody")= post.body
-        div#editArticleSubmit
-            input(type="submit", value="Send")
 
-        input(type="hidden", name="post[_id]", value=post._id)
+            div.buttons
+                a(class='destroy', href='/posts/delete/'+post._id, title="delete")
+                    img(src="/img/remove.png")
+                a(href='/posts', title="cancel")
+                    img(src="/img/cancel.png")
+            div
+                div Title :
+                input(type="text", name="title", id="editArticleTitle", value=post.title)
+            div
+                div Body :
+                textarea(name="body", rows=20, cols="100", id="editArticleBody")= post.body
+            div#editArticleSubmit.button
+                input(type="submit", value="Send")
+            input(type="hidden", name="post[_id]", value=post._id)
 
-        &nbsp;
 
-a(class='destroy', href='/posts/delete/'+post._id, title="delete") Delete
-&nbsp;
-a(href='/posts', title="cancel") Cancel
+!= partial('../comment/admin', {collection : comments, as : 'comment'})
 
