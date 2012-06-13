@@ -15,12 +15,12 @@ module.exports = function(app, models) {
                 utils.mongooseErrorHandler(err, req);
             }
 
-            res.redirect('/posts/' + req.post._id);
+            res.redirect('/posts/show/' + req.post._id);
         })
     });
 
     // Delete a comment
-    app.get('/comments/delete/:commentid', utils.requiresAdmin, function(req, res) {
+    app.get('/comments/delete/:commentid', utils.requiresAdmin(models), function(req, res) {
         var comment = req.comment;
 
         comment.remove(function(err) {

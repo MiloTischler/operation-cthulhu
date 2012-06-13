@@ -71,7 +71,7 @@
      });
 
      // View a single post
-     app.get('/posts/:postid', utils.requiresUser, function(req, res) {
+     app.get('/posts/show/:postid', utils.requiresUser, function(req, res) {
          console.log('LOL:' + req.comments);
          
          res.render('post/view.jade', {
