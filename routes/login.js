@@ -18,7 +18,8 @@ module.exports = function(app, models) {
         }).run(function(err, user) {
             if (err) console.log("Login failed.");
             if (!user) console.log("Username incorrect!");
-            if (user.password = password) console.log("Login correct!");
+            if (user.password == password) console.log("Login correct!")
+                else console.log("Incorrect password");
         });
 
 

@@ -9,7 +9,7 @@ module.exports = function(app, models) {
         User.find({}).asc('name').run(function(err, users) {
             if (err) throw err;
 
-            res.render('userList.jade', {
+            res.render('user/userList.jade', {
                 title: 'Hullahoop',
                 users: users
 
@@ -17,10 +17,6 @@ module.exports = function(app, models) {
             console.log('user:');
 
 
-        // var User = models.users;
-        res.render('user/userList.jade', {
-            title: 'Userlist'
-            //    users: users
         });
          console.log('user:2');
     });
