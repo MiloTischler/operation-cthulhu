@@ -114,3 +114,32 @@ h3 {
 #posts .item a .body {
   padding: 10px;
 }
+#grid-view {
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px;
+}
+#grid-view .item {
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #bbb;
+  overflow: hidden;
+  padding: 0 10px;
+  margin: 10px 0;
+  height: 40px;
+}
+#grid-view .item .buttons {
+  padding-top: 10px;
+  width: 50px;
+  float: right;
+}
+#grid-view .item .title {
+  padding-top: 10px;
+  width: 620px;
+  float: left;
+}
+#grid-view .item .title a {
+  text-decoration: none;
+  color: #555;
+}
