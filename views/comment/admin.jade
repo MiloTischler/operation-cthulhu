@@ -1,13 +1,14 @@
 div.item
-  div.head
+  div.head-comment
     div.title
       != comment.title
     div.user
     div.date
-      comment.date.toDateString()
+      != comment.date.toDateString()
 
-  div.body
-    != comment.body
+  div.body-comment
+    div.text
+      != comment.body
     div.buttons
       a(class='destroy', href='/comments/delete/'+comment._id, title="delete")
         img(src="/img/remove.png")
